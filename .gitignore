@@ -60,3 +60,6 @@ buck-out/
 
 # eslint
 .eslintrc.js
+
+#env
+.env
