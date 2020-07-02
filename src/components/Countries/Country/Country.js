@@ -1,26 +1,13 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { SvgUri } from 'react-native-svg';
 
 const Country = ({ flag, onPress }) => {
-  let countrieFlag = (
-    <Image
-      height={100}
-      source={require('../../../assets/images/noFlag.png')} />
-  )
-  if (flag) {
-    countrieFlag = (
-      <SvgUri
-        height={100}
-        width={'100%'}
-        uri={flag}
-      />
-    )
-  }
+  if (!flag) return null;
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      {countrieFlag}
+      <SvgUri height={100} width={'100%'} uri={flag} />
     </TouchableOpacity>
   )
 }

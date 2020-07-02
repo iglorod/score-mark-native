@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 
 import Country from './Country/Country';
 import SearchCountry from './SearchCountry/SearchCountry';
-import Title from './Title/Title';
+import LinearGradientTitle from '../UI/LinearGradientTitle/LinearGradientTitle';
 import ModalSpinner from '../UI/ModalSpinner/ModalSpinner';
 import { fetchAvailibleCountries } from '../../FakeData/FakeData';
 
@@ -31,8 +31,13 @@ const Countries = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Title />
+      <LinearGradientTitle>
+        <Text style={styles.title}>FOOTBALL LEAGUES</Text>
+        <Text style={styles.subTitle}>Consectetur libero id faucibus nisl tincidunt</Text>
+      </LinearGradientTitle>
+
       <SearchCountry searchCountry={searchCountry} />
+
       <View style={styles.countriesContainer}>
         <FlatList
           data={filterCountries()}
@@ -60,5 +65,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.01,
     elevation: 2,
     backgroundColor: '#fff',
-  }
+  },
+  title: {
+    color: '#fff',
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 20,
+  },
+  subTitle: {
+    color: '#fff',
+    fontSize: 12,
+    fontFamily: 'OpenSans-Regular',
+  },
 })

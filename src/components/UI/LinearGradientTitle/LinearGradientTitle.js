@@ -1,20 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-const Title = () => {
+const LinearGradientTitle = (props) => {
   return (
     <LinearGradient
       colors={['#32c391', '#188c87']}
       style={styles.linearGradient}
     >
-      <Text style={styles.title}>FOOTBALL LEAGUES</Text>
-      <Text style={styles.subTitle}>Consectetur libero id faucibus nisl tincidunt</Text>
+      {props.children}
     </LinearGradient>
   )
 }
 
-export default Title;
+export default LinearGradientTitle;
 
 const styles = StyleSheet.create({
   linearGradient: {
@@ -25,15 +24,5 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  title: {
-    color: '#fff',
-    fontFamily: 'OpenSans-Bold',
-    fontSize: 20,
-  },
-  subTitle: {
-    color: '#fff',
-    fontSize: 12,
-    fontFamily: 'OpenSans-Regular',
   },
 })
