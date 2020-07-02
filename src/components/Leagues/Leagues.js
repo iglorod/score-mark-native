@@ -1,10 +1,15 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const Leagues = ({ navigation }) => {
+const Leagues = ({ navigation, route }) => {
+  const { country, code, flag } = route.params;
+  console.log(route.params)
+
+  navigation.setOptions({ title: `${country} Leagues` })
+
   return (
     <View>
-      <Text onPress={navigation.navigate.bind(this, 'League')}>Leagues</Text>
+      <Text>Leagues</Text>
     </View>
   )
 }

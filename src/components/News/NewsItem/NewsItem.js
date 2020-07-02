@@ -8,6 +8,10 @@ const NewsItem = (props) => {
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image source={{ uri: article.urlToImage }} style={styles.image} />
+        <View style={styles.imageBottomInfo}>
+          <Text style={styles.briefAuthor}>{article.author || 'Sport NEWS'}</Text>
+          <Text style={styles.briefSource}>{article.source.name || 'Unknown issue'}</Text>
+        </View>
       </View>
 
       <View style={styles.dataContainer}>
@@ -35,6 +39,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     padding: 3,
+    position: 'relative',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.01,
@@ -87,5 +92,25 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 12,
     color: '#555',
-  }
+  },
+  imageBottomInfo: {
+    position: 'absolute',
+    left: 3,
+    bottom: 3,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    width: '100%',
+    backgroundColor: 'rgba(0,0,0,0.7)',
+  },
+  briefAuthor: {
+    color: '#fff',
+    fontSize: 16,
+    fontFamily: 'OpenSans-Bold',
+    textTransform: 'capitalize',
+  },
+  briefSource: {
+    fontSize: 12,
+    fontFamily: 'OpenSans-Regular',
+    color: '#adadad',
+  },
 })
