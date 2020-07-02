@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Fixtures from '../components/Fixtures/Fixtures';
 import Fixture from '../components/Fixture/Fixture';
@@ -16,11 +17,15 @@ const FixturesScreens = ({ navigation }) => {
       color={'#fff'}
       onPress={navigation.openDrawer} />
   )
+  
+  const backButtonImage = () => (
+    <Icon name={'keyboard-arrow-left'} size={30} color={'#fff'} />
+  )
 
   return (
     <Stack.Navigator
       initialRouteName='Fixtures'
-      screenOptions={{...headerOptions}}
+      screenOptions={{...headerOptions,  headerBackImage: backButtonImage }}
     >
       <Stack.Screen options={{ headerLeft: openDrawerButton }} name='Fixtures' component={Fixtures} />
       <Stack.Screen name='Fixture' component={Fixture} />

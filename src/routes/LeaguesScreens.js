@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Leagues from '../components/Leagues/Leagues';
 import League from '../components/League/League';
@@ -17,12 +18,16 @@ const LeaguesScreens = ({ navigation }) => {
       onPress={navigation.openDrawer} />
   )
 
+  const backButtonImage = () => (
+    <Icon name={'keyboard-arrow-left'} size={30} color={'#fff'} />
+  )
+
   return (
     <Stack.Navigator
       initialRouteName='Leagues'
-      screenOptions={headerOptions}
+      screenOptions={{ ...headerOptions, headerBackImage: backButtonImage }}
     >
-      <Stack.Screen options={{ headerLeft: openDrawerButton }} name='Leagues' component={Leagues} />
+      <Stack.Screen options={{ headerLeft: openDrawerButton}} name='Leagues' component={Leagues} />
       <Stack.Screen name='League' component={League} />
     </Stack.Navigator>
   )

@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import News from '../components/News/News';
 import IconButton from '../components/UI/IconButton/IconButton';
@@ -16,10 +17,14 @@ const NewsScreens = ({ navigation }) => {
       onPress={navigation.openDrawer} />
   )
 
+  const backButtonImage = () => (
+    <Icon name={'keyboard-arrow-left'} size={30} color={'#fff'} />
+  )
+
   return (
     <Stack.Navigator
       initialRouteName='News'
-      screenOptions={headerOptions}
+      screenOptions={{ ...headerOptions, headerBackImage: backButtonImage }}
     >
       <Stack.Screen options={{ headerLeft: openDrawerButton }} name='News' component={News} />
     </Stack.Navigator>
