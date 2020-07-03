@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Countries from '../components/Countries/Countries';
 import Leagues from '../components/Leagues/Leagues';
-import League from '../components/League/League';
+import LeagueScreens from './LeagueScreens';
 import IconButton from '../components/UI/IconButton/IconButton';
 import { headerOptions } from '../utility/theme';
 
@@ -30,7 +30,7 @@ const LeaguesScreens = ({ navigation }) => {
     >
       <Stack.Screen options={{ headerLeft: openDrawerButton}} name='Countries' component={Countries} />
       <Stack.Screen name='Leagues' component={Leagues} />
-      <Stack.Screen name='League' component={League} />
+      <Stack.Screen name='League' component={LeagueScreens} />
     </Stack.Navigator>
   )
 }

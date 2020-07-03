@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React from 'react';
 import { SafeAreaView, StyleSheet, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';

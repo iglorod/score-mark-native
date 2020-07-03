@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const League = () => {
+const LeagueRounds = () => {
   return (
     <View>
-      <Text>League</Text>
+      <Text>Rounds</Text>
     </View>
   )
 }
 
-export default League;
+export default LeagueRounds;

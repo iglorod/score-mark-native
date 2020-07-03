@@ -4,6 +4,7 @@ import { SvgUri } from 'react-native-svg';
 
 import LeagueItem from './LeagueItem/LeagueItem';
 import LinearGradientTitle from '../UI/LinearGradientTitle/LinearGradientTitle';
+import ModalSpinner from '../UI/ModalSpinner/ModalSpinner';
 import { LeagesByCountry } from '../../FakeData/FakeData';
 import { FlatList } from 'react-native-gesture-handler';
 
@@ -20,21 +21,25 @@ const Leagues = ({ navigation, route }) => {
 
   navigation.setOptions({ title: `${country} Leagues` })
 
-  const openLeague = (leagueId) => {
-    navigation.navigate('League', { leagueId, })
+  if (leagues.length === 0) return <ModalSpinner />
+
+  const openLeague = (league) => {
+    navigation.navigate('League', { ...league, })
   }
 
   return (
     <View>
       <LinearGradientTitle>
-        <SvgUri height={70} width={120} uri={flag} />
+        <View style={styles.flagBackground}>
+          <SvgUri height={70} width={120} uri={flag} />
+        </View>
         <Text style={styles.titleCountry}>{`${country} (${code})`}</Text>
         <Text style={styles.subTitleCountry}>Nulla porttitor massa id neque aliquam</Text>
       </LinearGradientTitle>
 
       <FlatList
         data={leagues}
-        renderItem={({ item }) => <LeagueItem league={item} onPress={openLeague.bind(this, item.league_id)} />}
+        renderItem={({ item }) => <LeagueItem league={item} onPress={openLeague.bind(this, item)} />}
         keyExtractor={(item, key) => key} />
     </View>
   )
@@ -53,5 +58,8 @@ const styles = StyleSheet.create({
   subTitleCountry: {
     color: '#fff',
     fontFamily: 'OpenSans-Regular',
+  },
+  flagBackground: {
+    backgroundColor: '#fff',
   }
 })
