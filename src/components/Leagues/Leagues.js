@@ -28,7 +28,7 @@ const Leagues = ({ navigation, route }) => {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <LinearGradientTitle>
         <View style={styles.flagBackground}>
           <SvgUri height={70} width={120} uri={flag} />
@@ -48,6 +48,9 @@ const Leagues = ({ navigation, route }) => {
 export default Leagues;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   titleCountry: {
     color: '#fff',
     fontSize: 20,

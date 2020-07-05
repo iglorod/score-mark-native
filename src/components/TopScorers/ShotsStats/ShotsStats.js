@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, ProgressBarAndroid } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { ProgressBar } from '@react-native-community/progress-bar-android';
 import { useTheme } from '@react-navigation/native';
 
 const ShotsStats = ({ player }) => {
@@ -11,7 +12,7 @@ const ShotsStats = ({ player }) => {
     <View style={styles.container}>
       <View style={styles.statsTitle}>
         <Text>Sts on target</Text>
-        <ProgressBarAndroid
+        <ProgressBar
           color={colors.primary}
           style={styles.progressBar}
           styleAttr='Horizontal'

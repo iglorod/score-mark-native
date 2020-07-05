@@ -32,7 +32,7 @@ const Countries = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <LinearGradientTitle>
-        <Text style={styles.title}>FOOTBALL LEAGUES</Text>
+        <Text style={styles.title}>AVAILIBLE COUNTRIES</Text>
         <Text style={styles.subTitle}>Consectetur libero id faucibus nisl tincidunt</Text>
       </LinearGradientTitle>
 
