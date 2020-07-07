@@ -51,7 +51,6 @@ export const fetchFixturesActionCreator = () => {
   return dispatch => {
     //axios.get(`https://api-football-v1.p.rapidapi.com/v2/fixtures/date/2020-02-06`)
     // .then(response => response.data.api.results.fixtures)
-    dispatch(startLoadingActionCreator());
     fetchFixture()
       .then(response => response.api.results.fixtures[0])
       .then(fixture => dispatch(setFixtureActionCreator(fixture)))

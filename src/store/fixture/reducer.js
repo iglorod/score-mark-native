@@ -2,7 +2,7 @@ import * as actionTypes from '../actionTypes';
 
 const initialState = {
   fixture: null,
-  loading: false,
+  loading: true,
   homePlayer: {},
   awayPlayer: {},
 }

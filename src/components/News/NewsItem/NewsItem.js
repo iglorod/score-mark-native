@@ -21,7 +21,7 @@ const NewsItem = (props) => {
 
       <View style={styles.actionsContainer}>
         <Text style={styles.date}>{new Date().toLocaleString(article.publishedAt)}</Text>
-        <TouchableOpacity onPress={onPress.bind(this, article.url)}>
+        <TouchableOpacity onPress={onPress}>
           <Text style={{ ...styles.readMore, color: theme.primary }}>READ MORE</Text>
         </TouchableOpacity>
       </View>

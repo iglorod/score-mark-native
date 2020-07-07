@@ -5,7 +5,6 @@ import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 
-import FixturesScreens from '../../routes/FixturesScreens';
 import LeaguesScreens from '../../routes/LeaguesScreens';
 import NewsScreens from '../../routes/NewsScreens';
 
@@ -43,13 +42,6 @@ const Layout = () => {
         options={{
           drawerLabel: 'Leagues',
           drawerIcon: config => <Icon name={'grid-on'} size={config.size} color={config.color} />,
-        }} />
-      <Drawer.Screen
-        name='FixturesScreens'
-        component={FixturesScreens}
-        options={{
-          drawerLabel: 'Fixtures',
-          drawerIcon: config => <Icon name={'games'} size={config.size} color={config.color} />,
         }} />
     </Drawer.Navigator>
   );

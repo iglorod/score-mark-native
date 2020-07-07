@@ -1,17 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Tips from 'react-native-tips'
-import { useNavigation } from '@react-navigation/native';
 
-const FixtureStatus = ({ fixture }) => {
+const FixtureStatus = ({ fixture, onPress }) => {
   const [showTips, setShowTips] = useState(false);
-  const navigation = useNavigation();
-
-  const openFixture = useCallback((id) => {
-    navigation.navigate('Fixture', { id, })
-  }, [])
 
   let scores = `${fixture.goalsHomeTeam} - ${fixture.goalsAwayTeam}`;
   if (fixture.statusShort === 'NS') {
@@ -21,7 +15,7 @@ const FixtureStatus = ({ fixture }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.date}>{moment(fixture.event_timestamp * 1000).format('DD.MM.YY')}</Text>
-      <TouchableOpacity onPress={openFixture.bind(this, fixture.fixture_id)}>
+      <TouchableOpacity onPress={onPress}>
         <Text style={styles.scores}>{scores}</Text>
       </TouchableOpacity>
       <Tips

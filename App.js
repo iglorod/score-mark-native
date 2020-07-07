@@ -15,9 +15,9 @@ import Layout from './src/components/Layout/Layout';
 const App = () => {
   const store = createStore(combineReducers({
     club: clubReducer,
-    fixture: fixtureReducer,
-    player: playerReducer,
-  }, applyMiddleware(thunk)))
+    fxt: fixtureReducer,
+    plr: playerReducer,
+  }), applyMiddleware(thunk))
 
   return (
     <Provider store={store}>

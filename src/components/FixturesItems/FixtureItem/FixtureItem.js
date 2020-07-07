@@ -6,7 +6,7 @@ import FixtureStatus from './FixtureStatus/FixtureStatus';
 
 import { fixturePredictions } from '../../../FakeData/FakeData';
 
-const FixtureItem = ({ fixture }) => {
+const FixtureItem = ({ fixture, onPress }) => {
   const [predictions, setPredictions] = useState(null);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const FixtureItem = ({ fixture }) => {
   return (
     <View style={styles.container}>
       <Team fixture={fixture} winningPercent={predictions ? predictions.winning_percent.home : '0'} />
-      <FixtureStatus fixture={fixture} />
+      <FixtureStatus fixture={fixture} onPress={onPress} />
       <Team fixture={fixture} winningPercent={predictions ? predictions.winning_percent.away : '0'} away />
     </View>
   )

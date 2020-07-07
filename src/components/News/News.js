@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, FlatList, Linking, Alert, StyleSheet, RefreshControl } from 'react-native';
+import { View, FlatList, StyleSheet, RefreshControl } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import axios from 'axios';
 import { REACT_APP_NEWS_API_KEY } from 'react-native-dotenv';
 
 import NewsItem from './NewsItem/NewsItem';
+import { openUrlHandler } from '../../utility/url';
 import ModalSpinner from '../UI/ModalSpinner/ModalSpinner';
 
 const News = () => {
@@ -23,16 +24,6 @@ const News = () => {
       .catch(error => console.log(error))
   }, [refreshing])
 
-  const openUrlHandler = useCallback(async (url) => {
-    const supported = await Linking.canOpenURL(url);
-
-    if (supported) {
-      await Linking.openURL(url);
-    } else {
-      Alert.alert(`Don't know how to open this URL: ${url}`);
-    }
-  }, []);
-
   const onRefresh = useCallback(() => {
     setRefreshing(true);
   }, [refreshing]);
@@ -44,7 +35,7 @@ const News = () => {
       <FlatList
         data={articles}
         scrollEnabled={!refreshing}
-        renderItem={({ item }) => <NewsItem article={item} theme={colors} onPress={openUrlHandler} />}
+        renderItem={({ item }) => <NewsItem article={item} theme={colors} onPress={openUrlHandler.bind(this, item.url)} />}
         keyExtractor={(item, key) => key.toString()}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       />
