@@ -6,17 +6,20 @@ import Odds from './Odds/Odds';
 
 const BookmakerOdds = ({ odd }) => {
   return (
-    <View style={styles.odd}>
+    <View style={styles.container}>
       <Bookmaker bookmakerName={odd.bookmaker_name} />
       <Odds odds={odd.bets} />
     </View>
   )
 }
 
-export default BookmakerOdds;
+export default React.memo(BookmakerOdds);
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'row',
+    marginTop: 10,
+    marginBottom: 15,
   }
 })

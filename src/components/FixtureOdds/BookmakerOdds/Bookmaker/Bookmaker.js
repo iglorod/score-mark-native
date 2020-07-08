@@ -22,6 +22,8 @@ export default Bookmaker;
 
 const styles = StyleSheet.create({
   bookmaker: {
+    display: 'flex',
+    alignItems: 'center',
     width: 100,
   },
   bookmakerName: {

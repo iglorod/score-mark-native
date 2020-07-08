@@ -19,10 +19,10 @@ const FixtureOdds = () => {
   if (odds.length === 0) return <ModalSpinner />;
 
   return (
-    <FlatList
-      data={odds}
-      renderItem={({ item }) => (<BookmakerOdds odd={item} />)}
-      keyExtractor={(item, key) => key} />
+      <FlatList
+        data={odds}
+        renderItem={({ item }) => (<BookmakerOdds odd={item} />)}
+        keyExtractor={(item, key) => key} />
   )
 }
 

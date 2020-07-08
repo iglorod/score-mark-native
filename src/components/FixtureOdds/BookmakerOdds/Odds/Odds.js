@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 
 import Odd from './Odd/Odd';
 
 const Odds = ({ odds }) => {
   return (
-    <View style={styles.container}>
+    <View>
       <FlatList
         data={odds}
         renderItem={({ item }) => (<Odd odd={item} />)}
@@ -15,9 +15,3 @@ const Odds = ({ odds }) => {
 }
 
 export default Odds;
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  }
-})
