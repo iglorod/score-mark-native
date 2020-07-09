@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   bookmakerPage: {
     color: '#1890ff',
     marginTop: 5,
+    paddingRight: 5,
   },
   offset: {
     height: '100%',
@@ -40,6 +41,6 @@ const styles = StyleSheet.create({
   link: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
   }
 })

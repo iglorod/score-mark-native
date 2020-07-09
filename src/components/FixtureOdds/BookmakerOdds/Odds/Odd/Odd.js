@@ -4,7 +4,7 @@ import { useTheme } from '@react-navigation/native';
 import { ProgressBar } from '@react-native-community/progress-bar-android';
 
 const Odd = ({ odd }) => {
-  const [maxOdd, setMaxOdd] = useState(0);
+  const [maxOdd, setMaxOdd] = useState(0.1);
   const { colors } = useTheme();
 
   useEffect(() => {
