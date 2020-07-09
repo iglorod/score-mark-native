@@ -1,41 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { SvgUri } from 'react-native-svg';
 
 import LeagueItem from './LeagueItem/LeagueItem';
-import LinearGradientTitle from '../UI/LinearGradientTitle/LinearGradientTitle';
-import ModalSpinner from '../UI/ModalSpinner/ModalSpinner';
+import FetchingSpinner from '../UI/FetchingSpinner/FetchingSpinner';
 import { LeagesByCountry } from '../../FakeData/FakeData';
 import { FlatList } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
-const Leagues = ({ navigation, route }) => {
+const Leagues = ({ country }) => {
   const [leagues, setLeagues] = useState([]);
-  const { country, code, flag } = route.params;
+  const [loading, setLoading] = useState(false);
+
+  const navigation = useNavigation();
 
   useEffect(() => {
-    LeagesByCountry(code)
+    if (!country) {
+      setLeagues([]);
+      return;
+    }
+
+    setLoading(true);
+    LeagesByCountry(country.code)
       .then(response => response.api.results.leagues)
       .then(leagues => setLeagues(leagues))
+      .then(() => setLoading(false))
       .catch(error => console.log(error.message))
+  }, [country])
+
+  const openLeague = useCallback((league) => {
+    navigation.navigate('League', { ...league, })
   }, [])
 
-  navigation.setOptions({ title: `${country} Leagues` })
+  if (loading) return <FetchingSpinner />
 
-  if (leagues.length === 0) return <ModalSpinner />
-
-  const openLeague = (league) => {
-    navigation.navigate('League', { ...league, })
+  let countryHeader = null;
+  if (country) {
+    countryHeader = (
+      <View>
+        <Text style={styles.header}>{country.country} Leagues</Text>
+      </View>
+    )
   }
 
   return (
     <View style={styles.container}>
-      <LinearGradientTitle>
-        <View style={styles.flagBackground}>
-          <SvgUri height={70} width={120} uri={flag} />
-        </View>
-        <Text style={styles.titleCountry}>{`${country} (${code})`}</Text>
-        <Text style={styles.subTitleCountry}>Nulla porttitor massa id neque aliquam</Text>
-      </LinearGradientTitle>
+      {countryHeader}
 
       <FlatList
         data={leagues}
@@ -64,5 +73,12 @@ const styles = StyleSheet.create({
   },
   flagBackground: {
     backgroundColor: '#fff',
+  },
+  header: {
+    fontSize: 20,
+    fontFamily: 'OpenSans-Bold',
+    textAlign: 'center',
+    marginTop: 25,
+    paddingBottom: 10,
   }
 })

@@ -2,8 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import Countries from '../components/Countries/Countries';
-import Leagues from '../components/Leagues/Leagues';
+import SelectLeague from '../components/SelectLeague/SelectLeague';
 import LeagueScreens from './LeagueScreens';
 import IconButton from '../components/UI/IconButton/IconButton';
 import { headerOptions } from '../utility/theme';
@@ -26,11 +25,10 @@ const LeaguesScreens = ({ navigation }) => {
 
   return (
     <Stack.Navigator
-      initialRouteName='Countries'
+      initialRouteName='Select League'
       screenOptions={{ ...headerOptions, headerBackImage: backButtonImage }}
     >
-      <Stack.Screen options={{ headerLeft: openDrawerButton }} name='Countries' component={Countries} />
-      <Stack.Screen name='Leagues' component={Leagues} />
+      <Stack.Screen options={{ headerLeft: openDrawerButton }} name='Select League' component={SelectLeague} />
       <Stack.Screen name='League' component={LeagueScreens} />
       <Stack.Screen name='FixturesScreens' component={FixturesScreens} />
     </Stack.Navigator>

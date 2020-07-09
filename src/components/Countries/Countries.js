@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 
 import Country from './Country/Country';
 import SearchCountry from './SearchCountry/SearchCountry';
-import LinearGradientTitle from '../UI/LinearGradientTitle/LinearGradientTitle';
 import ModalSpinner from '../UI/ModalSpinner/ModalSpinner';
+import IconBanner from '../UI/IconBanner/IconBanner';
 import { fetchAvailibleCountries } from '../../FakeData/FakeData';
 
-const Countries = ({ navigation }) => {
+const Countries = ({ selectedCountry, onChoose }) => {
   const [countries, setCountries] = useState([]);
   const searchCountry = useState('');
 
@@ -18,35 +18,40 @@ const Countries = ({ navigation }) => {
       .catch(error => console.log(error))
   }, [])
 
-  const openLeagues = useCallback((country) => {
-    navigation.navigate('Leagues', { ...country });
-  }, [])
-
-  if (countries.length === 0) return <ModalSpinner />
+  if (countries.length === 0) return <ModalSpinner />;
 
   const filterCountries = () => {
-    if (!searchCountry) return countries;
-    return countries.filter(item => item.country.includes(searchCountry[0]))
+    return countries.filter(item => item.country.toLowerCase().includes(searchCountry[0].toLowerCase()))
   }
 
-  return (
-    <View style={styles.container}>
-      <LinearGradientTitle>
-        <Text style={styles.title}>AVAILIBLE COUNTRIES</Text>
-        <Text style={styles.subTitle}>Consectetur libero id faucibus nisl tincidunt</Text>
-      </LinearGradientTitle>
-
-      <SearchCountry searchCountry={searchCountry} />
-
+  let content = <IconBanner iconName={'location-searching'} text={'Find league by country'} />;
+  if (searchCountry[0].length > 1) {
+    content = (
       <View style={styles.countriesContainer}>
         <FlatList
           data={filterCountries()}
-          renderItem={({ item }) => <Country flag={item.flag} onPress={openLeagues.bind(this, item)} />}
-          keyExtractor={(item, key) => key.toString()}
+          renderItem={({ item }) => (
+            <Country
+              flag={item.flag}
+              selected={selectedCountry ? selectedCountry.code === item.code : false}
+              onPress={onChoose.bind(this, item)} />
+          )}
+          keyExtractor={(item, key) => key}
           numColumns={3}
           horizontal={false}
+          columnWrapperStyle={styles.listStyle}
         />
       </View>
+    )
+  }
+
+  return (
+    <View>
+      <Text style={styles.header}>Choose a country</Text>
+      
+      <SearchCountry searchCountry={searchCountry} />
+
+      {content}
     </View>
   )
 }
@@ -54,9 +59,6 @@ const Countries = ({ navigation }) => {
 export default Countries;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   countriesContainer: {
     margin: 10,
     padding: 15,
@@ -66,14 +68,14 @@ const styles = StyleSheet.create({
     elevation: 2,
     backgroundColor: '#fff',
   },
-  title: {
-    color: '#fff',
-    fontFamily: 'OpenSans-Bold',
+  listStyle: {
+    justifyContent: 'center',
+  },
+  header: {
     fontSize: 20,
-  },
-  subTitle: {
-    color: '#fff',
-    fontSize: 12,
-    fontFamily: 'OpenSans-Regular',
-  },
+    fontFamily: 'OpenSans-Bold',
+    textAlign: 'center',
+    marginTop: 25,
+    paddingBottom: 10,
+  }
 })
