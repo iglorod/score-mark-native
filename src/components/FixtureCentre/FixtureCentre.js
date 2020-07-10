@@ -7,6 +7,7 @@ import Formation from './Formation/Formation';
 import Substitutes from './Substitutes/Substitutes';
 import SelectedPlayer from './SelectedPlayer/SelectedPlayer';
 import PlayersStatistics from './PlayersStatistics/PlayersStatistics';
+import FixtureSummary from '../FixtureSummary/FixtureSummary';
 import DeviceOrientation from '../UI/DeviceOrientation/DeviceOrientation';
 
 const FixtureCentre = () => {
@@ -35,7 +36,10 @@ const FixtureCentre = () => {
   const content = (
     <ScrollView>
       <View style={styles.container}>
+        <FixtureSummary />
+
         <Formation />
+
         <View style={styles.buttonsContainer}>
           <TouchableOpacity style={styles.button} onPress={setOpenId.bind(this, 0)}>
             <Icon name={'swap-vert'} size={20} color={openId === 0 ? colors.primary : '#A5A5A5'} />

@@ -52,14 +52,14 @@ const styles = StyleSheet.create({
     marginRight: 2,
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
-    backgroundColor: '#008BE0',
+    backgroundColor: '#138B86',
   },
   lastPercents: {
     textAlign: 'right',
     height: 26,
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
-    backgroundColor: '#EB5B14',
+    backgroundColor: '#F6AE2D',
   },
   percents: {
     display: 'flex',

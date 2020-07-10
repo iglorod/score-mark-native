@@ -38,11 +38,11 @@ const styles = StyleSheet.create({
   },
   homeStats: {
     fontSize: 16,
-    color: '#008BE0',
+    color: '#138B86',
   },
   awayStats: {
     fontSize: 16,
-    color: '#EB5B14',
+    color: '#F6AE2D',
   },
   dash: {
     paddingHorizontal: 5,

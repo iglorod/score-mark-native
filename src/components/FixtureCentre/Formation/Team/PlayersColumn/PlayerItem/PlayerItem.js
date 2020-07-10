@@ -49,10 +49,10 @@ const styles = StyleSheet.create({
     borderRadius: 150,
   },
   mainColorAvatar: {
-    backgroundColor: '#EB5B14',
+    backgroundColor: '#F6AE2D',
   },
   secondColorAvatar: {
-    backgroundColor: '#008BE0',
+    backgroundColor: '#138B86',
   },
   playerData: {
     color: '#fff',

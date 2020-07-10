@@ -5,8 +5,6 @@ import { SvgUri } from 'react-native-svg';
 const Country = ({ flag, selected, onPress }) => {
   if (!flag) return null;
 
-  console.log(selected);
-
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <SvgUri style={{ opacity: selected ? .6 : 1 }} height={100} width={'100%'} uri={flag} />

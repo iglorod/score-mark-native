@@ -34,12 +34,12 @@ const styles = StyleSheet.create({
     width: 15,
     height: 15,
     marginHorizontal: 5,
-    backgroundColor: '#008BE0',
+    backgroundColor: '#138B86',
   },
   secondColor: {
     width: 15,
     height: 15,
     marginHorizontal: 5,
-    backgroundColor: '#EB5B14',
+    backgroundColor: '#F6AE2D',
   }
 })

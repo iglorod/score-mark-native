@@ -62,11 +62,11 @@ const styles = StyleSheet.create({
   awayAvatar: {
     fontSize: 14,
     marginTop: 10,
-    backgroundColor: '#EB5B14',
+    backgroundColor: '#F6AE2D',
   },
   homeAwatar: {
     fontSize: 14,
     marginTop: 10,
-    backgroundColor: '#008BE0',
+    backgroundColor: '#138B86',
   },
 })

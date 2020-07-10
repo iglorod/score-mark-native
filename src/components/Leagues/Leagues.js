@@ -4,7 +4,6 @@ import { View, Text, StyleSheet } from 'react-native';
 import LeagueItem from './LeagueItem/LeagueItem';
 import FetchingSpinner from '../UI/FetchingSpinner/FetchingSpinner';
 import { LeagesByCountry } from '../../FakeData/FakeData';
-import { FlatList } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
 const Leagues = ({ country }) => {
@@ -46,10 +45,11 @@ const Leagues = ({ country }) => {
     <View style={styles.container}>
       {countryHeader}
 
-      <FlatList
-        data={leagues}
-        renderItem={({ item }) => <LeagueItem league={item} onPress={openLeague.bind(this, item)} />}
-        keyExtractor={(item, key) => key} />
+      {
+        leagues.map((item, index) => (
+          <LeagueItem key={index} league={item} onPress={openLeague.bind(this, item)} />
+        ))
+      }
     </View>
   )
 }

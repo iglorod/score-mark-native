@@ -51,10 +51,10 @@ const FixtureScreens = (props) => {
 
           if (route.name === 'Stats') {
             iconName = focused ? 'swap-horizontal-bold' : 'swap-horizontal';
-          } else if (route.name === 'Events') {
-            iconName = focused ? 'microphone' : 'microphone-outline';
           } else if (route.name === 'Centre') {
             iconName = 'chart-bubble';
+          } else if (route.name === 'Events') {
+            iconName = focused ? 'microphone' : 'microphone-outline';
           } else if (route.name === 'Odds') {
             iconName = 'chart-pie';
           }
@@ -64,8 +64,8 @@ const FixtureScreens = (props) => {
       })}
     >
       <Tab.Screen name='Stats' component={FixtureStats} />
-      <Tab.Screen name='Events' component={FixtureEvents} />
       <Tab.Screen name='Centre' component={FixtureCentre} />
+      <Tab.Screen name='Events' component={FixtureEvents} />
       <Tab.Screen name='Odds' component={FixtureOdds} />
     </Tab.Navigator>
   )
