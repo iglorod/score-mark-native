@@ -20,6 +20,7 @@ export default RotateRequest;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingVertical: 80,
     justifyContent: 'center',
     alignItems: 'center',
   },

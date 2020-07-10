@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import clubReducer from './src/store/club/reducer';
 import fixtureReducer from './src/store/fixture/reducer';
 import playerReducer from './src/store/player/reducer';
+import commentReducer from './src/store/comment/reducer';
 import Layout from './src/components/Layout/Layout';
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
@@ -50,6 +51,7 @@ const App = () => {
     club: clubReducer,
     fxt: fixtureReducer,
     plr: playerReducer,
+    cmnt: commentReducer,
   }), applyMiddleware(thunk))
 
   return (
