@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import React, { useEffect } from 'react';
-import { View, Image, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Image, Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { connect } from 'react-redux';
 
@@ -8,14 +8,14 @@ import FixtureStats from '../components/FixtureStats/FixtureStats';
 import FixtureEvents from '../components/FixtureEvents/FixtureEvents';
 import FixtureCentre from '../components/FixtureCentre/FixtureCentre';
 import FixtureOdds from '../components/FixtureOdds/FixtureOdds';
-import Comments from '../components/Comments/Comments';
+import WithComments from '../components/UI/WithComments/WithComments';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ModalSpinner from '../components/UI/ModalSpinner/ModalSpinner';
 import { fetchFixturesActionCreator, clearFixtureActionCreator } from '../store/fixture/actions';
 import { openCommentsActionCreator, closeCommentsActionCreator } from '../store/comment/actions';
 
 const FixtureScreens = (props) => {
-  const { navigation, route } = props;
+  const { route } = props;
 
   const Tab = createBottomTabNavigator();
   const fixtureId = route.params.id;
@@ -56,19 +56,6 @@ const FixtureScreens = (props) => {
 
   if (props.loading) return <ModalSpinner />;
 
-  const renderComponentWithComments = (component) => (
-    <ScrollView style={styles.content} contentContainerStyl={styles.contentContainer}>
-      {component}
-
-      <View style={styles.comments}>
-        <Comments
-          url={props.url}
-          identifier={props.identifier}
-          title={props.title} />
-      </View>
-    </ScrollView>
-  )
-
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -89,9 +76,15 @@ const FixtureScreens = (props) => {
         },
       })}
     >
-      <Tab.Screen name='Stats' component={renderComponentWithComments.bind(this, <FixtureStats />)} />
-      <Tab.Screen name='Centre' component={renderComponentWithComments.bind(this, <FixtureCentre />)} />
-      <Tab.Screen name='Events' component={renderComponentWithComments.bind(this, <FixtureEvents />)} />
+      <Tab.Screen name='Stats'>
+        {() => <WithComments><FixtureStats /></WithComments>}
+      </Tab.Screen>
+      <Tab.Screen name='Centre'>
+        {() => <WithComments><FixtureCentre /></WithComments>}
+      </Tab.Screen>
+      <Tab.Screen name='Events'>
+        {() => <WithComments><FixtureEvents /></WithComments>}
+      </Tab.Screen>
       <Tab.Screen name='Odds' component={FixtureOdds} />
     </Tab.Navigator>
   )
@@ -101,9 +94,6 @@ const mapStateToProps = state => {
   return {
     fixture: state.fxt.fixture,
     loading: state.fxt.loading,
-    url: state.cmnt.url,
-    identifier: state.cmnt.identifier,
-    title: state.cmnt.title,
   }
 }
 
@@ -131,15 +121,5 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: '600',
-  },
-  content: {
-    flex: 1,
-  },
-  contentContainer: {
-    alignItems: 'center',
-  },
-  comments: {
-    flex: 1,
-    margin: 10,
   }
 })

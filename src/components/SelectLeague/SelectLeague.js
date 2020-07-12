@@ -4,13 +4,13 @@ import { ScrollView, StyleSheet } from 'react-native';
 import Countries from '../Countries/Countries';
 import Leagues from '../Leagues/Leagues';
 
-const SelectLeague = () => {
+const SelectLeague = ({ onPress }) => {
   const [country, setCountry] = useState(null);
 
   return (
     <ScrollView style={styles.container}>
       <Countries selectedCountry={country} onChoose={setCountry} />
-      <Leagues country={country} />
+      <Leagues country={country} onPress={onPress} />
     </ScrollView>
   )
 }

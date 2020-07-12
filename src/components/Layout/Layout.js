@@ -7,6 +7,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import LeaguesScreens from '../../routes/LeaguesScreens';
 import NewsScreens from '../../routes/NewsScreens';
+import ClubsScreens from '../../routes/ClubsScreens';
 
 const Layout = () => {
   const Drawer = createDrawerNavigator();
@@ -43,6 +44,14 @@ const Layout = () => {
           drawerLabel: 'Leagues',
           drawerIcon: config => <Icon name={'grid-on'} size={config.size} color={config.color} />,
         }} />
+      <Drawer.Screen
+        name='ClubsScreens'
+        component={ClubsScreens}
+        options={{
+          drawerLabel: 'Clubs',
+          drawerIcon: config => <Icon name={'blur-circular'} size={config.size} color={config.color} />,
+        }} />
+
     </Drawer.Navigator>
   );
 };

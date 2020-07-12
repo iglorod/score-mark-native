@@ -3,12 +3,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import SelectLeague from '../components/SelectLeague/SelectLeague';
-import LeagueScreens from './LeagueScreens';
+import Clubs from '../components/Clubs/Clubs';
 import IconButton from '../components/UI/IconButton/IconButton';
 import { headerOptions } from '../utility/theme';
-import FixturesScreens from './FixturesScreens';
+import ClubScreens from './ClubScreens';
 
-const LeaguesScreens = ({ navigation }) => {
+const FixturesScreens = ({ navigation }) => {
   const Stack = createStackNavigator();
 
   const openDrawerButton = () => (
@@ -23,25 +23,24 @@ const LeaguesScreens = ({ navigation }) => {
     <Icon name={'keyboard-arrow-left'} size={30} color={'#fff'} />
   )
 
-  const openLeague = (league) => {
-    navigation.navigate('League', { ...league, })
+  const openClubs = (league) => {
+    navigation.navigate('Clubs', { ...league, })
   }
+
+  navigation.setOptions({ title: 'Clubs List' });
 
   return (
     <Stack.Navigator
       initialRouteName='Select League'
       screenOptions={{ ...headerOptions, headerBackImage: backButtonImage }}
     >
-      <Stack.Screen
-        options={{ headerLeft: openDrawerButton }}
-        name='Select League'
-      >
-        {() => <SelectLeague onPress={openLeague} />}
+      <Stack.Screen options={{ headerLeft: openDrawerButton }} name='Select League'>
+        {() => <SelectLeague onPress={openClubs} />}
       </Stack.Screen>
-      <Stack.Screen name='League' component={LeagueScreens} />
-      <Stack.Screen name='FixturesScreens' component={FixturesScreens} />
+      <Stack.Screen name='Clubs' component={Clubs} />
+      <Stack.Screen name='Club' component={ClubScreens} />
     </Stack.Navigator>
   )
 }
 
-export default LeaguesScreens;
+export default FixturesScreens;

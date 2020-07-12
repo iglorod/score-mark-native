@@ -1,16 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 import LeagueItem from './LeagueItem/LeagueItem';
 import FetchingSpinner from '../UI/FetchingSpinner/FetchingSpinner';
 import { LeagesByCountry } from '../../FakeData/FakeData';
-import { useNavigation } from '@react-navigation/native';
 
-const Leagues = ({ country }) => {
+const Leagues = ({ country, onPress }) => {
   const [leagues, setLeagues] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  const navigation = useNavigation();
 
   useEffect(() => {
     if (!country) {
@@ -25,10 +22,6 @@ const Leagues = ({ country }) => {
       .then(() => setLoading(false))
       .catch(error => console.log(error.message))
   }, [country])
-
-  const openLeague = useCallback((league) => {
-    navigation.navigate('League', { ...league, })
-  }, [])
 
   if (loading) return <FetchingSpinner />
 
@@ -47,7 +40,7 @@ const Leagues = ({ country }) => {
 
       {
         leagues.map((item, index) => (
-          <LeagueItem key={index} league={item} onPress={openLeague.bind(this, item)} />
+          <LeagueItem key={index} league={item} onPress={onPress.bind(this, item)} />
         ))
       }
     </View>
