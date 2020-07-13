@@ -1,14 +1,20 @@
-import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
+import ModalSpinner from '../UI/ModalSpinner/ModalSpinner';
+import { fetchClubStatsActionCreator } from '../../store/club/actions';
 import ComparePercents from '../UI/ComparePercents/ComparePercents';
 
-const ClubStats = ({ stats }) => {
-  if (stats === null) return null;
+const ClubStats = ({ stats, fetchClubStats }) => {
+  useEffect(() => {
+    fetchClubStats();
+  }, [fetchClubStats])
+
+  if (stats === null) return <ModalSpinner />;
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <ComparePercents
         title={'Match played Home/Away'}
         first={stats.matchs.matchsPlayed.home}
@@ -37,7 +43,7 @@ const ClubStats = ({ stats }) => {
         title={'Goals for / Goals against'}
         first={stats.goals.goalsFor.total}
         last={stats.goals.goalsAgainst.total} />
-    </ScrollView>
+    </View>
   )
 }
 
@@ -47,7 +53,12 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(ClubStats);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchClubStats: () => { dispatch(fetchClubStatsActionCreator()) },
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ClubStats);
 
 const styles = StyleSheet.create({
   container: {

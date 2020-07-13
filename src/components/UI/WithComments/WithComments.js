@@ -7,15 +7,23 @@ import Comments from '../../Comments/Comments';
 const WithComments = (props) => {
   if (!props.identifier) return null;
 
-  return (
-    <ScrollView style={styles.content} contentContainerStyl={styles.contentContainer}>
-      {props.children}
-
+  let comments = null;
+  if (props.showComments) {
+    comments = (
       <View style={styles.comments}>
         <Comments
           url={props.url}
           identifier={props.identifier}
           title={props.title} />
+      </View>
+    )
+  }
+
+  return (
+    <ScrollView contentContainerStyle={props.showComments ? null : styles.container}>
+      <View style={styles.contentContainer}>
+        {props.children}
+        {comments}
       </View>
     </ScrollView>
   )
@@ -32,14 +40,14 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps)(WithComments);
 
 const styles = StyleSheet.create({
-  content: {
+  container: {
     flex: 1,
   },
   contentContainer: {
-    alignItems: 'center',
+    flex: 1,
+    position: 'relative',
   },
   comments: {
-    flex: 1,
     margin: 10,
   }
 })

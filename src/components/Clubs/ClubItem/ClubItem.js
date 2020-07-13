@@ -2,11 +2,9 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 const Country = ({ logo, onPress }) => {
-  console.log(logo);
-
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Image height={100} width={'100%'} source={{ uri: logo }} />
+      <Image height={100} width={'50%'} source={{ uri: logo }} />
     </TouchableOpacity>
   )
 }
@@ -18,6 +16,6 @@ const styles = StyleSheet.create({
     height: 100,
     width: '30%',
     margin: 5,
-    backgroundColor: 'red',
+    backgroundColor: 'rgba(0,0,0,0.1)',
   }
 })

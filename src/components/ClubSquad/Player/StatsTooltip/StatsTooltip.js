@@ -11,7 +11,7 @@ const StatsTooltip = ({ text, data, style }) => {
       text={text}
       onRequestClose={setShowTips.bind(this, false)}
     >
-      <Text style={style}>{data}</Text>
+      <Text style={style} onPress={setShowTips.bind(this, true)}>{data}</Text>
     </Tips>
   )
 }

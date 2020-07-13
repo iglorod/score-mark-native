@@ -3,18 +3,17 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import StatsTooltip from './StatsTooltip/StatsTooltip';
 
-const Player = ({ player, index, openPlayer }) => {
+const Player = ({ player, openPlayer }) => {
   return (
     <View style={styles.player}>
-      <Text style={styles.order}>{index}</Text>
-
-      <Text style={styles.playerName} onPress={openPlayer}>{player.firstname} {player.lastname}</Text>
-      <Text style={styles.playerAgeAndPos}>{player.age}, {player.position}</Text>
+      <View>
+        <Text style={styles.playerName} onPress={openPlayer}>{player.firstname} {player.lastname}</Text>
+        <Text style={styles.playerAgeAndPos}>{player.age} y.o., {player.position}</Text>
+      </View>
 
       <Text>{player.height}</Text>
       <Text>{player.weight}</Text>
 
-      <StatsTooltip text={'Lineups'} data={player.games.lineups} />
       <StatsTooltip text={'Minutes played'} data={player.games.minutes_played} />
       <StatsTooltip text={'Goals'} data={player.goals.total || '-'} />
       <StatsTooltip text={'Assists'} data={player.goals.assists || '-'} />
@@ -37,11 +36,11 @@ const styles = StyleSheet.create({
   player: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    marginVertical: 10,
-    marginHorizontal: 5,
+    alignItems: 'flex-start',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(0,0,0,0.1)',
   },
   order: {
     color: '#000',
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   playerAgeAndPos: {
-    fontSize: 10,
+    fontSize: 12,
   },
   rating: {
     color: '#f57922',

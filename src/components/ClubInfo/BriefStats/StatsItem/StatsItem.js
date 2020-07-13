@@ -12,7 +12,12 @@ const StatsItem = ({ tooltip, value }) => {
       onRequestClose={setShowTips.bind(this, false)}
     >
       <View style={styles.avatar}>
-        <Text style={value >= 0 ? styles.greenText : styles.redText}>{value}</Text>
+        <Text
+          style={value >= 0 ? styles.greenText : styles.redText}
+          onPress={setShowTips.bind(this, true)}
+        >
+          {value}
+        </Text>
       </View>
     </Tips>
   )
@@ -26,6 +31,8 @@ const styles = StyleSheet.create({
     width: 40,
     backgroundColor: '#fff',
     borderRadius: 150,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   greenText: {
     color: '#52c41a',

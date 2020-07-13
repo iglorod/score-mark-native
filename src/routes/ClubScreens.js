@@ -8,7 +8,7 @@ import ClubStats from '../components/ClubStats/ClubStats';
 import WithComments from '../components/UI/WithComments/WithComments';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { fetchClubActionCreator } from '../store/club/actions';
-import { fetchClubStatsActionCreator, clearClubDataActionCreator } from '../store/club/actions';
+import { clearClubDataActionCreator } from '../store/club/actions';
 import { openCommentsActionCreator, closeCommentsActionCreator } from '../store/comment/actions';
 
 const ClubScreens = (props) => {
@@ -16,17 +16,12 @@ const ClubScreens = (props) => {
 
   useEffect(() => {
     //get club id from props.history
-
     props.fetchClub();
-  }, [props.fetchClub])
-
-  useEffect(() => {
-    props.fetchClubStats();
 
     return () => {
       props.clearClubData();
     }
-  }, [props.fetchClubStats, props.clearClubData])
+  }, [props.fetchClub, props.clearClubData])
 
   useEffect(() => {
     if (!props.club) return;
@@ -46,9 +41,9 @@ const ClubScreens = (props) => {
           let iconName;
 
           if (route.name === 'Squad') {
-            iconName = focused ? 'view-list' : 'view-list-outline';
+            iconName = 'view-list';
           } else if (route.name === 'Stats') {
-            iconName = focused ? 'swap-horizontal' : 'swap-horizontal-bold';
+            iconName = focused ? 'swap-horizontal-bold' : 'swap-horizontal';
           }
 
           return <Icon name={iconName} size={size} color={color} />;
@@ -56,10 +51,10 @@ const ClubScreens = (props) => {
       })}
     >
       <Tab.Screen name='Squad'>
-        {() => <WithComments><ClubSquad /></WithComments>}
+        {() => <WithComments showComments={!(props.players.length === 0)}><ClubSquad /></WithComments>}
       </Tab.Screen>
       <Tab.Screen name='Stats'>
-        {() => <WithComments><ClubStats /></WithComments>}
+        {() => <WithComments showComments={!!props.stats}><ClubStats /></WithComments>}
       </Tab.Screen>
     </Tab.Navigator>
   )
@@ -68,16 +63,17 @@ const ClubScreens = (props) => {
 const mapStateToProps = (state) => {
   return {
     club: state.club.club,
+    players: state.club.players,
+    stats: state.club.stats,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchClubStats: () => { dispatch(fetchClubStatsActionCreator()) },
+    fetchClub: (id) => { dispatch(fetchClubActionCreator(id)) },
     clearClubData: () => { dispatch(clearClubDataActionCreator()) },
     openComments: (url, identifier, title) => { dispatch(openCommentsActionCreator(url, identifier, title)) },
     closeComments: () => { dispatch(closeCommentsActionCreator()) },
-    fetchClub: (id) => { dispatch(fetchClubActionCreator(id)) },
   }
 }
 

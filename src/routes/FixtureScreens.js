@@ -77,13 +77,13 @@ const FixtureScreens = (props) => {
       })}
     >
       <Tab.Screen name='Stats'>
-        {() => <WithComments><FixtureStats /></WithComments>}
+        {() => <WithComments showComments><FixtureStats /></WithComments>}
       </Tab.Screen>
       <Tab.Screen name='Centre'>
-        {() => <WithComments><FixtureCentre /></WithComments>}
+        {() => <FixtureCentre />}
       </Tab.Screen>
       <Tab.Screen name='Events'>
-        {() => <WithComments><FixtureEvents /></WithComments>}
+        {() => <WithComments showComments><FixtureEvents /></WithComments>}
       </Tab.Screen>
       <Tab.Screen name='Odds' component={FixtureOdds} />
     </Tab.Navigator>

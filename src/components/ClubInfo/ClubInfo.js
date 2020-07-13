@@ -13,9 +13,9 @@ const ClubInfo = ({ club }) => {
   if (!club) return <ModalSpinner />;
 
   return (
-    <View style={styles.clubInfo}>
+    <View style={{ ...styles.clubInfo, backgroundColor: colors.primary }}>
       <View style={styles.logoContainer}>
-        <Image source={{ uri: club.logo }} height={100} width={100} />
+        <Image source={{ uri: club.logo }} height={50} width={50} />
       </View>
 
       <Text style={styles.teamName}>{club.name}</Text>
@@ -24,12 +24,12 @@ const ClubInfo = ({ club }) => {
         <View>
           <Image source={require('../../assets/images/stadium.png')} style={styles.stadiumIcon} />
         </View>
-        <Text>{club.venue_name}</Text>
+        <Text style={styles.stadiumName}>{club.venue_name}</Text>
       </View>
 
       <View style={styles.address}>
-        <Icon style={styles.enviromentIcon} name={'room'} size={20} color={colors.primary} />
-        <Text>{club.venue_city}, {club.venue_address}</Text>
+        <Icon style={styles.enviromentIcon} name={'room'} size={25} color={'#fff'} />
+        <Text style={styles.stadiumAddress}>{club.venue_city}, {club.venue_address}</Text>
       </View>
 
       <BriefStats />
@@ -50,23 +50,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     marginTop: 70,
+    marginBottom: 25,
+    marginHorizontal: 5,
     minWidth: 235,
-    backgroundColor: '#f57922',
     borderRadius: 5,
   },
   logoContainer: {
+    height: 120,
+    width: 120,
     padding: 10,
     borderRadius: 150,
     backgroundColor: '#fff',
     marginTop: -70,
     zIndex: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.01,
+    elevation: 2,
   },
   teamName: {
+    color: '#fff',
     fontSize: 20,
     fontFamily: 'OpenSans-SemiBold',
   },
   stadiumIcon: {
     height: 20,
+    width: 30,
     marginRight: 5,
   },
   stadium: {
@@ -75,9 +84,16 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginVertical: 5,
   },
+  stadiumName: {
+    color: '#fff',
+  },
   address: {
     fontSize: 12,
     flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
+  stadiumAddress: {
+    color: '#fff',
   },
   enviromentIcon: {
     marginRight: 5,
