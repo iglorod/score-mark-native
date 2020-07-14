@@ -54,12 +54,5 @@ const styles = StyleSheet.create({
   },
   listStyle: {
     justifyContent: 'center',
-  },
-  header: {
-    fontSize: 20,
-    fontFamily: 'OpenSans-Bold',
-    textAlign: 'center',
-    marginTop: 25,
-    paddingBottom: 10,
   }
 })

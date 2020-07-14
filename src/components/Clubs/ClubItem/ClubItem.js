@@ -4,7 +4,7 @@ import { StyleSheet, TouchableOpacity, Image } from 'react-native';
 const Country = ({ logo, onPress }) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Image height={100} width={'50%'} source={{ uri: logo }} />
+      <Image style={styles.image} source={{ uri: logo }} />
     </TouchableOpacity>
   )
 }
@@ -16,6 +16,9 @@ const styles = StyleSheet.create({
     height: 100,
     width: '30%',
     margin: 5,
-    backgroundColor: 'rgba(0,0,0,0.1)',
+  },
+  image: {
+    height: 100,
+    width: '95%',
   }
 })

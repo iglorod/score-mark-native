@@ -1,16 +1,20 @@
 import React from 'react';
-import { StyleSheet, Image, View, Text } from 'react-native';
+import { StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
 import { ProgressBar } from '@react-native-community/progress-bar-android';
 
-const Team = ({ fixture, winningPercent, away }) => {
+const Team = ({ fixture, winningPercent, away, openClub }) => {
+  const team = away ? fixture.awayTeam : fixture.homeTeam;
+
   return (
     <View style={away ? styles.awayContainer : styles.container}>
       <View>
-        <Image source={{ uri: fixture.homeTeam.logo }} style={styles.teamLogo} />
+        <Image source={{ uri: team.logo }} style={styles.teamLogo} />
       </View>
 
       <View style={styles.dateArea}>
-        <Text numberOfLines={1}>{fixture.homeTeam.team_name}</Text>
+        <TouchableOpacity onPress={openClub.bind(this, team)}>
+          <Text numberOfLines={1}>{team.team_name}</Text>
+        </TouchableOpacity>
         <Text style={styles.additionalData}>{fixture.round}</Text>
         <ProgressBar
           progress={winningPercent.replace(/%/, '') * 0.01}

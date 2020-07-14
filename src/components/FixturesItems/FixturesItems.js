@@ -11,11 +11,23 @@ const FixturesItems = ({ fixtures }) => {
     navigation.navigate('FixtureScreens', { id, })
   }, [])
 
+  const openClub = useCallback((club) => {
+    navigation.navigate('ClubsScreens', {
+      screen: 'Club',
+      params: club,
+    })
+  }, [])
+
   return (
     <View style={styles.container}>
       <FlatList
         data={fixtures}
-        renderItem={({ item }) => <FixtureItem fixture={item} onPress={openFixture.bind(this, item.fixture_id)} />}
+        renderItem={({ item }) => (
+          <FixtureItem
+            fixture={item}
+            openClub={openClub}
+            onPress={openFixture.bind(this, item.fixture_id)} />
+        )}
         keyExtractor={(item, key) => key}
       />
     </View>

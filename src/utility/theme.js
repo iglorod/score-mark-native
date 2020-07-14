@@ -2,9 +2,9 @@ export const MyTheme = {
   dark: false,
   colors: {
     primary: '#138B86',
-    background: '#FDFCF7',
+    background: '#415861',
     card: '#fff',
-    text: '#4A4A4A',
+    text: '#415861',
     border: '#5AB08E',
   },
 }

@@ -15,7 +15,7 @@ const ClubScreens = (props) => {
   const Tab = createBottomTabNavigator();
 
   useEffect(() => {
-    //get club id from props.history
+    //get club id from props.route.params.team_id
     props.fetchClub();
 
     return () => {

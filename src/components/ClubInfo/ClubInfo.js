@@ -15,7 +15,7 @@ const ClubInfo = ({ club }) => {
   return (
     <View style={{ ...styles.clubInfo, backgroundColor: colors.primary }}>
       <View style={styles.logoContainer}>
-        <Image source={{ uri: club.logo }} height={50} width={50} />
+        <Image style={styles.image} source={{ uri: club.logo }} />
       </View>
 
       <Text style={styles.teamName}>{club.name}</Text>
@@ -67,6 +67,10 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.01,
     elevation: 2,
+  },
+  image: {
+    height: 100,
+    width: 100,
   },
   teamName: {
     color: '#fff',

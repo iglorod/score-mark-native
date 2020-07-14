@@ -25,7 +25,10 @@ const Countries = ({ selectedCountry, onChoose }) => {
   }
 
   let content = <IconBanner iconName={'location-searching'} text={'Find league by country'} />;
-  if (searchCountry[0].length > 1) {
+  if (countries.length > 0 && filterCountries().length === 0) {
+    content = <IconBanner iconName={'do-not-disturb-alt'} text={'Country not found'} />;
+  }
+  else if (searchCountry[0].length > 1) {
     content = (
       <View style={styles.countriesContainer}>
         <FlatList
@@ -48,7 +51,7 @@ const Countries = ({ selectedCountry, onChoose }) => {
   return (
     <View>
       <Text style={styles.header}>Choose a country</Text>
-      
+
       <SearchCountry searchCountry={searchCountry} />
 
       {content}
