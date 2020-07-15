@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import Spinner from 'react-native-spinkit';
 
-const ModalSpinner = () => {
+const FetchingSpinner = () => {
   const { colors } = useTheme();
 
   return (
@@ -16,7 +16,7 @@ const ModalSpinner = () => {
   )
 }
 
-export default ModalSpinner;
+export default FetchingSpinner;
 
 const styles = StyleSheet.create({
   container: {

@@ -1,22 +1,29 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 import OpenSkeleton from '../UI/OpenSkeleton/OpenSkeleton';
+import OpenMatches from '../OpenComponents/OpenMatches/OpenMatches';
 
 const Main = ({ navigation }) => {
   return (
-    <View>
+    <ScrollView contentContainerStyle={styles.container}>
       <OpenSkeleton
-        text={'News Feed'}
+        title={'News Feed'}
         image={require('../../assets/images/openNews.png')}
         onPress={navigation.navigate.bind(this, 'News')} />
       <OpenSkeleton
-        text={'Players'}
+        title={'Players'}
         image={require('../../assets/images/openPlayers.png')}
         onPress={navigation.navigate.bind(this, 'Players')} />
-
-    </View>
+      <OpenMatches />
+    </ScrollView>
   )
 }
 
 export default Main;
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 10,
+  }
+})

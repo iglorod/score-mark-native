@@ -6,15 +6,15 @@ const OpenSkeleton = (props) => {
   const { colors } = useTheme();
 
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, ...props.style }}>
       <Image source={props.image} style={styles.image} />
 
       <View style={styles.content}>
-        <Text style={{ ...styles.text, color: colors.text }}>{props.text}</Text>
+        <Text style={{ ...styles.text, color: colors.text }}>{props.title}</Text>
 
         <TouchableOpacity onPress={props.onPress}>
           <View style={{ ...styles.button, backgroundColor: colors.background }}>
-            <Text style={styles.buttonText}>OPEN</Text>
+            <Text style={styles.buttonText}>{props.buttonLabel || 'OPEN'}</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -30,14 +30,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 20,
     paddingHorizontal: 40,
-    marginVertical: 10,
-    marginHorizontal: 10,
-    borderRadius: 15,
+    marginVertical: 15,
+    borderRadius: 5,
     backgroundColor: '#fff',
+    width: '100%',
   },
   image: {
-    height: 100,
-    width: 120,
+    height: 110,
+    width: 130,
   },
   content: {
     justifyContent: 'space-between',
