@@ -11,7 +11,7 @@ const ChooseCountry = (props) => {
   return (
     <Card style={{ flexDirection: 'column' }}>
       <StepProgress
-        progress={'50%'}
+        progress={props.step}
         onBack={() => { props.setSelectedCountry({}); props.onBack(); }}
         onNext={nextButtonAvailible ? props.onNext : null}
         nextButtonAvailible={nextButtonAvailible}

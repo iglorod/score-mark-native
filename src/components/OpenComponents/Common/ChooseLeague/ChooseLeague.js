@@ -25,7 +25,8 @@ const ChooseLeague = (props) => {
 
   const onNextHandler = () => {
     if (selectedTypeId === 0) props.onNext();       //if type (was choosed in prev-prev step) === Club
-    else if (selectedTypeId === 1) return navigation.navigate('LeagueFixtures', selectedLeague);   //if type === League
+    else if (selectedTypeId === 1) return navigation.navigate(this, 'LeagueFixtures', selectedLeague);   //if type === League
+    else if (selectedTypeId === undefined) return navigation.navigate(this, 'League', selectedLeague);
     return null;
   }
 
@@ -52,7 +53,7 @@ const ChooseLeague = (props) => {
   return (
     <Card style={{ flexDirection: 'column' }}>
       <StepProgress
-        progress={'75%'}
+        progress={props.step}
         onBack={() => { setSelectedLeague({}); props.onBack(); }}
         onNext={onNextHandler}
         nextButtonAvailible={nextButtonAvailible} />

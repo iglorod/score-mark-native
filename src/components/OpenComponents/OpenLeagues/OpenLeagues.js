@@ -2,19 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, StyleSheet, Animated, Dimensions, Easing } from 'react-native';
 
 import OpenSkeleton from '../../UI/OpenSkeleton/OpenSkeleton';
-import ChooseType from '../Common/ChooseType/ChooseType';
 import ChooseCountry from '../Common/ChooseCountry/ChooseCountry';
 import ChooseLeague from '../Common/ChooseLeague/ChooseLeague';
-import ChooseClub from '../Common/ChooseClub/ChooseClub';
 
-const OpenMatches = () => {
+const OpenLeagues = ({ scrollToBottom }) => {
   const [rightIndent, setRightIndent] = useState(0);
   const [screenWidth, setScreenWidth] = useState(Dimensions.get('window').width + 10);
 
-  const [selectedTypeId, setSelectedTypeId] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState({});
   const [selectedLeague, setSelectedLeague] = useState({});
-  const [selectedClub, setSelectedClub] = useState({});
 
   const move = useRef(new Animated.Value(rightIndent)).current;
   const grow = useRef(new Animated.Value(0)).current;
@@ -27,6 +23,10 @@ const OpenMatches = () => {
   useEffect(() => {
     moveAnimation();
     growAnimation();
+
+    if (currentScreenId == 1) {
+      setTimeout(scrollToBottom, 700);
+    }
   }, [rightIndent])
 
   const moveAnimation = () => {
@@ -66,9 +66,9 @@ const OpenMatches = () => {
         }}
       >
         <OpenSkeleton
-          title={'Matches'}
+          title={'Leagues'}
           buttonLabel={'NEXT'}
-          image={require('../../../assets/images/openMatches.png')}
+          image={require('../../../assets/images/openLeagues.png')}
           onPress={setRightIndent.bind(this, screenWidth)} />
       </Animated.View>
 
@@ -76,29 +76,6 @@ const OpenMatches = () => {
         style={{
           right: move,
           height: currentScreenId === 1
-            ? grow.interpolate({
-              inputRange: [0, 100],
-              outputRange: [165, 200],
-            })
-            : grow.interpolate({
-              inputRange: [0, 100],
-              outputRange: [200, 165],
-            }),
-          ...styles.animatedView,
-        }}
-      >
-        <ChooseType
-          step={'25%'}
-          selectedId={selectedTypeId}
-          setSelectedId={setSelectedTypeId}
-          onNext={setRightIndent.bind(this, screenWidth * 2)}
-          onBack={setRightIndent.bind(this, 0)} />
-      </Animated.View>
-
-      <Animated.View
-        style={{
-          right: move,
-          height: currentScreenId === 2
             ? grow.interpolate({
               inputRange: [0, 100],
               outputRange: [165, 350],
@@ -114,14 +91,14 @@ const OpenMatches = () => {
           step={'50%'}
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
-          onNext={setRightIndent.bind(this, screenWidth * 3)}
-          onBack={setRightIndent.bind(this, screenWidth)} />
+          onNext={setRightIndent.bind(this, screenWidth * 2)}
+          onBack={setRightIndent.bind(this, 0)} />
       </Animated.View>
 
       <Animated.View
         style={{
           right: move,
-          height: currentScreenId === 3
+          height: currentScreenId === 2
             ? grow.interpolate({
               inputRange: [0, 100],
               outputRange: [165, 200],
@@ -134,42 +111,18 @@ const OpenMatches = () => {
         }}
       >
         <ChooseLeague
-          step={'75%'}
-          selectedTypeId={selectedTypeId}
+          step={'100%'}
           selectedCountry={selectedCountry}
           selectedLeague={selectedLeague}
           setSelectedLeague={setSelectedLeague}
-          onNext={setRightIndent.bind(this, screenWidth * 4)}
-          onBack={setRightIndent.bind(this, screenWidth * 2)} />
+          onNext={setRightIndent.bind(this, screenWidth * 3)}
+          onBack={setRightIndent.bind(this, screenWidth)} />
       </Animated.View>
-
-      <Animated.View
-        style={{
-          right: move,
-          height: currentScreenId === 4
-            ? grow.interpolate({
-              inputRange: [0, 100],
-              outputRange: [165, 200],
-            })
-            : grow.interpolate({
-              inputRange: [0, 100],
-              outputRange: [200, 165],
-            }),
-          ...styles.animatedView,
-        }}
-      >
-        <ChooseClub
-          step={'100%'}
-          selectedLeague={selectedLeague}
-          selectedClub={selectedClub}
-          setSelectedClub={setSelectedClub}
-          onBack={setRightIndent.bind(this, screenWidth * 3)} />
-      </Animated.View>
-    </View >
+    </View>
   )
 }
 
-export default OpenMatches;
+export default OpenLeagues;
 
 const styles = StyleSheet.create({
   container: {

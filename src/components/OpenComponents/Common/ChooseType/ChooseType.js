@@ -19,7 +19,7 @@ const ChooseType = (props) => {
   return (
     <Card style={{ flexDirection: 'column' }}>
       <StepProgress
-        progress={'25%'}
+        progress={props.step}
         onBack={() => { setSelectedId(null); props.onBack(); }}
         onNext={onNextHandler}
         nextButtonAvailible={selectedId !== null} />
