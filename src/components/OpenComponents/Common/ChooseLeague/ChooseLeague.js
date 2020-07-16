@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 
 import Card from '../../../UI/Card/Card';
 import FetchingSpinner from '../../../UI/FetchingSpinner/FetchingSpinner';
@@ -12,6 +12,7 @@ const ChooseLeague = (props) => {
   const [leagues, setLeagues] = useState([]);
 
   const { selectedTypeId, selectedCountry, selectedLeague, setSelectedLeague } = props;
+  const { colors } = useTheme();
   const navigation = useNavigation();
 
   const nextButtonAvailible = Object.keys(props.selectedLeague).length > 0;
@@ -30,7 +31,7 @@ const ChooseLeague = (props) => {
     return null;
   }
 
-  let content = <FetchingSpinner />;
+  let content = <FetchingSpinner color={colors.text} />;
   if (leagues.length > 0) {
     content = (
       <ScrollView contentContainerStyle={styles.avatarContainer} horizontal>

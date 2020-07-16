@@ -22,8 +22,10 @@ const SearchCountry = (props) => {
     <View style={styles.container}>
       <TextInput
         style={{ ...styles.input, backgroundColor: colors.background }}
-        onChangeText={setSearchText}
         value={searchText}
+        onChangeText={setSearchText}
+        placeholder={'Type country name here...'}
+        placeholderTextColor={'#fff'}
       />
 
       <SearchResults

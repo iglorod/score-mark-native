@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import Spinner from 'react-native-spinkit';
 
-const FetchingSpinner = () => {
+const FetchingSpinner = ({ color }) => {
   const { colors } = useTheme();
 
   return (
@@ -11,7 +11,7 @@ const FetchingSpinner = () => {
       <Spinner
         size={60}
         type={'ThreeBounce'}
-        color={colors.primary} />
+        color={color || colors.primary} />
     </View>
   )
 }

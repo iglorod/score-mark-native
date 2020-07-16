@@ -45,13 +45,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.01,
     elevation: 2,
     backgroundColor: '#fff',
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
   },
   image: {
     height: 250,
     width: '100%',
   },
   dataContainer: {
-    marginTop: 15,
+    marginTop: 10,
     padding: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 0 },
@@ -84,6 +86,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.01,
     elevation: 2,
     backgroundColor: '#fff',
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
   },
   readMore: {
     fontSize: 16,

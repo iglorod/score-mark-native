@@ -3,9 +3,9 @@ import { View, Text, StyleSheet } from 'react-native';
 import StoredItem from './StoredItem/StoredItem';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Navbar = () => {
+const Navbar = ({ backgroundColor = 'transparent' }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor }]}>
       <View style={styles.storedItems}>
         <StoredItem />
         <StoredItem />
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   titlePartTwo: {
     color: '#fff',
     fontSize: 22,
-    fontFamily: 'OpenSans-SemiBold',
+    fontFamily: 'OpenSans-Bold',
   },
   searchContainer: {
     width: 90,
