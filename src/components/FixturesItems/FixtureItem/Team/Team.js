@@ -1,8 +1,11 @@
 import React from 'react';
 import { StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
 import { ProgressBar } from '@react-native-community/progress-bar-android';
+import { useTheme } from '@react-navigation/native';
 
 const Team = ({ fixture, winningPercent, away, openClub }) => {
+  const { colors } = useTheme();
+
   const team = away ? fixture.awayTeam : fixture.homeTeam;
 
   return (
@@ -18,6 +21,7 @@ const Team = ({ fixture, winningPercent, away, openClub }) => {
         <Text style={styles.additionalData}>{fixture.round}</Text>
         <ProgressBar
           progress={winningPercent.replace(/%/, '') * 0.01}
+          color={colors.secondaryText}
           styleAttr='Horizontal'
           indeterminate={false} />
       </View>

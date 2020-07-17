@@ -224,12 +224,12 @@ export const todayFixtures = () => {
                   'homeTeam': {
                     'team_id': 1137,
                     'team_name': 'Atletico Nacional',
-                    'logo': 'https://media.api-sports.io/football/teams/1137.png',
+                    'logo': 'https://media.api-sports.io/football/teams/1237.png',
                   },
                   'awayTeam': {
                     'team_id': 3662,
                     'team_name': 'Guastatoya',
-                    'logo': 'https://media.api-sports.io/football/teams/3662.png',
+                    'logo': 'https://media.api-sports.io/football/teams/3162.png',
                   },
                   'goalsHomeTeam': 0,
                   'goalsAwayTeam': 0,
@@ -256,12 +256,12 @@ export const todayFixtures = () => {
                   'homeTeam': {
                     'team_id': 1137,
                     'team_name': 'Atletico Nacional',
-                    'logo': 'https://media.api-sports.io/football/teams/1137.png',
+                    'logo': 'https://media.api-sports.io/football/teams/1435.png',
                   },
                   'awayTeam': {
                     'team_id': 3662,
                     'team_name': 'Guastatoya',
-                    'logo': 'https://media.api-sports.io/football/teams/3662.png',
+                    'logo': 'https://media.api-sports.io/football/teams/3652.png',
                   },
                   'goalsHomeTeam': 0,
                   'goalsAwayTeam': 2,
@@ -288,12 +288,12 @@ export const todayFixtures = () => {
                   'homeTeam': {
                     'team_id': 1137,
                     'team_name': 'Atletico Nacional',
-                    'logo': 'https://media.api-sports.io/football/teams/1137.png',
+                    'logo': 'https://media.api-sports.io/football/teams/115.png',
                   },
                   'awayTeam': {
                     'team_id': 3662,
                     'team_name': 'Guastatoya',
-                    'logo': 'https://media.api-sports.io/football/teams/3662.png',
+                    'logo': 'https://media.api-sports.io/football/teams/3672.png',
                   },
                   'goalsHomeTeam': 1,
                   'goalsAwayTeam': 0,
@@ -320,12 +320,12 @@ export const todayFixtures = () => {
                   'homeTeam': {
                     'team_id': 1137,
                     'team_name': 'Atletico Nacional',
-                    'logo': 'https://media.api-sports.io/football/teams/1137.png',
+                    'logo': 'https://media.api-sports.io/football/teams/1173.png',
                   },
                   'awayTeam': {
                     'team_id': 3662,
                     'team_name': 'Guastatoya',
-                    'logo': 'https://media.api-sports.io/football/teams/3662.png',
+                    'logo': 'https://media.api-sports.io/football/teams/3665.png',
                   },
                   'goalsHomeTeam': 1,
                   'goalsAwayTeam': 1,
@@ -352,12 +352,12 @@ export const todayFixtures = () => {
                   'homeTeam': {
                     'team_id': 1137,
                     'team_name': 'Atletico Nacional',
-                    'logo': 'https://media.api-sports.io/football/teams/1137.png',
+                    'logo': 'https://media.api-sports.io/football/teams/1197.png',
                   },
                   'awayTeam': {
                     'team_id': 3662,
                     'team_name': 'Guastatoya',
-                    'logo': 'https://media.api-sports.io/football/teams/3662.png',
+                    'logo': 'https://media.api-sports.io/football/teams/662.png',
                   },
                   'goalsHomeTeam': 0,
                   'goalsAwayTeam': 1,
@@ -384,12 +384,12 @@ export const todayFixtures = () => {
                   'homeTeam': {
                     'team_id': 1137,
                     'team_name': 'Atletico Nacional',
-                    'logo': 'https://media.api-sports.io/football/teams/1137.png',
+                    'logo': 'https://media.api-sports.io/football/teams/127.png',
                   },
                   'awayTeam': {
                     'team_id': 3662,
                     'team_name': 'Guastatoya',
-                    'logo': 'https://media.api-sports.io/football/teams/3662.png',
+                    'logo': 'https://media.api-sports.io/football/teams/362.png',
                   },
                   'goalsHomeTeam': 2,
                   'goalsAwayTeam': 0,
@@ -416,12 +416,12 @@ export const todayFixtures = () => {
                   'homeTeam': {
                     'team_id': 1137,
                     'team_name': 'Atletico Nacional',
-                    'logo': 'https://media.api-sports.io/football/teams/1137.png',
+                    'logo': 'https://media.api-sports.io/football/teams/112.png',
                   },
                   'awayTeam': {
                     'team_id': 3662,
                     'team_name': 'Guastatoya',
-                    'logo': 'https://media.api-sports.io/football/teams/3662.png',
+                    'logo': 'https://media.api-sports.io/football/teams/362.png',
                   },
                   'goalsHomeTeam': 1,
                   'goalsAwayTeam': 0,
@@ -448,12 +448,12 @@ export const todayFixtures = () => {
                   'homeTeam': {
                     'team_id': 1137,
                     'team_name': 'Atletico Nacional',
-                    'logo': 'https://media.api-sports.io/football/teams/1137.png',
+                    'logo': 'https://media.api-sports.io/football/teams/147.png',
                   },
                   'awayTeam': {
                     'team_id': 3662,
                     'team_name': 'Guastatoya',
-                    'logo': 'https://media.api-sports.io/football/teams/3662.png',
+                    'logo': 'https://media.api-sports.io/football/teams/662.png',
                   },
                   'goalsHomeTeam': 1,
                   'goalsAwayTeam': 0,
@@ -480,12 +480,12 @@ export const todayFixtures = () => {
                   'homeTeam': {
                     'team_id': 1137,
                     'team_name': 'Atletico Nacional',
-                    'logo': 'https://media.api-sports.io/football/teams/1137.png',
+                    'logo': 'https://media.api-sports.io/football/teams/115.png',
                   },
                   'awayTeam': {
                     'team_id': 3662,
                     'team_name': 'Guastatoya',
-                    'logo': 'https://media.api-sports.io/football/teams/3662.png',
+                    'logo': 'https://media.api-sports.io/football/teams/362.png',
                   },
                   'goalsHomeTeam': 1,
                   'goalsAwayTeam': 1,

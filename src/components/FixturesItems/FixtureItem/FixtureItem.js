@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
 
 import Team from './Team/Team';
 import FixtureStatus from './FixtureStatus/FixtureStatus';
-
+import Card from '../../UI/Card/Card';
 import { fixturePredictions } from '../../../FakeData/FakeData';
 
 const FixtureItem = ({ fixture, openClub, onPress }) => {
@@ -17,24 +16,12 @@ const FixtureItem = ({ fixture, openClub, onPress }) => {
   }, [])
 
   return (
-    <View style={styles.container}>
+    <Card style={{ justifyContent: 'center', paddingHorizontal: 10, marginVertical: 10, }}>
       <Team fixture={fixture} openClub={openClub} winningPercent={predictions ? predictions.winning_percent.home : '0'} />
       <FixtureStatus fixture={fixture} onPress={onPress} />
       <Team fixture={fixture} openClub={openClub} winningPercent={predictions ? predictions.winning_percent.away : '0'} away />
-    </View>
+    </Card>
   )
 }
 
 export default React.memo(FixtureItem);
-
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e8e8e8',
-    paddingBottom: 10,
-    marginTop: 10,
-  }
-})

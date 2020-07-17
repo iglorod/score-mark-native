@@ -8,6 +8,7 @@ import Navbar from '../Navbar/Navbar';
 import FetchingSpinner from '../UI/FetchingSpinner/FetchingSpinner';
 import SearchPlayer from './SearchPlayer/SearchPlayer';
 import PlayerItem from './PlayerItem/PlayerItem';
+import NotFound from '../NotFound/NotFound';
 import { fetchPlayers } from '../../FakeData/FakeData';
 
 const PlayersItems = () => {
@@ -28,7 +29,6 @@ const PlayersItems = () => {
       .catch(error => console.log(error.message))
   }, 800)).current;
 
-
   useEffect(() => {
     if (searchText.length < 3) {
       setPlayers([]);
@@ -39,9 +39,11 @@ const PlayersItems = () => {
     debounceSearch(searchText);
   }, [searchText])
 
-
   let content = <FetchingSpinner color={'#fff'} />
-  if (!loading) {
+  if (!loading && players.length === 0) {
+    content = <NotFound text={'Enter the correct player name'} />
+  }
+  else if (!loading) {
     content = (
       players.map((player, index) => (
         <PlayerItem key={index} player={player} />
