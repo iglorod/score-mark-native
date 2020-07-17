@@ -3,7 +3,8 @@ import { ScrollView, StyleSheet } from 'react-native';
 
 import OpenSkeleton from '../UI/OpenSkeleton/OpenSkeleton';
 import OpenMatches from '../OpenComponents/OpenMatches/OpenMatches';
-import OpenLeagues from '../OpenComponents/OpenLeagues/OpenLeagues';
+import OpenLeague from '../OpenComponents/OpenLeague/OpenLeague';
+import OpenClub from '../OpenComponents/OpenClub/OpenClub';
 
 const Main = ({ navigation }) => {
   const viewRef = useRef();
@@ -27,7 +28,8 @@ const Main = ({ navigation }) => {
         onPress={navigation.navigate.bind(this, 'Players')} />
 
       <OpenMatches />
-      <OpenLeagues scrollToBottom={scrollToBottom} />
+      <OpenClub />
+      <OpenLeague scrollToBottom={scrollToBottom} />
     </ScrollView>
   )
 }

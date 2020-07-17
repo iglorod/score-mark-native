@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   image: {
-    height: 110,
-    width: 130,
+    height: 120,
+    width: 120,
   },
   content: {
     justifyContent: 'space-between',

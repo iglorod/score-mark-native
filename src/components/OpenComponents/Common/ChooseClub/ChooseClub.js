@@ -44,12 +44,19 @@ const ChooseClub = (props) => {
     )
   }
 
+  const onNextHandler = () => {
+    if (props.openClub) {
+      navigation.navigate('Club', selectedClub)
+    }
+    navigation.navigate('ClubFixtures', selectedClub)
+  }
+
   return (
     <Card style={{ flexDirection: 'column' }}>
       <StepProgress
         progress={props.step}
         onBack={() => { setSelectedClub({}); props.onBack(); }}
-        onNext={navigation.navigate.bind(this, 'ClubFixtures', selectedClub)}
+        onNext={onNextHandler}
         nextButtonAvailible={nextButtonAvailible} />
 
       {content}

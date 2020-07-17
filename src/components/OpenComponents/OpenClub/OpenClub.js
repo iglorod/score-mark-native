@@ -4,13 +4,15 @@ import { View, StyleSheet, Animated, Dimensions, Easing } from 'react-native';
 import OpenSkeleton from '../../UI/OpenSkeleton/OpenSkeleton';
 import ChooseCountry from '../Common/ChooseCountry/ChooseCountry';
 import ChooseLeague from '../Common/ChooseLeague/ChooseLeague';
+import ChooseClub from '../Common/ChooseClub/ChooseClub';
 
-const OpenLeagues = ({ scrollToBottom }) => {
+const OpenClub = () => {
   const [rightIndent, setRightIndent] = useState(0);
   const [screenWidth, setScreenWidth] = useState(Dimensions.get('window').width + 10);
 
   const [selectedCountry, setSelectedCountry] = useState({});
   const [selectedLeague, setSelectedLeague] = useState({});
+  const [selectedClub, setSelectedClub] = useState({});
 
   const move = useRef(new Animated.Value(rightIndent)).current;
   const grow = useRef(new Animated.Value(0)).current;
@@ -23,10 +25,6 @@ const OpenLeagues = ({ scrollToBottom }) => {
   useEffect(() => {
     moveAnimation();
     growAnimation();
-
-    if (currentScreenId == 1) {
-      setTimeout(scrollToBottom, 700);
-    }
   }, [rightIndent])
 
   const moveAnimation = () => {
@@ -66,9 +64,9 @@ const OpenLeagues = ({ scrollToBottom }) => {
         }}
       >
         <OpenSkeleton
-          title={'Leagues'}
+          title={'Clubs'}
           buttonLabel={'NEXT'}
-          image={require('../../../assets/images/openLeagues.png')}
+          image={require('../../../assets/images/openClubs.png')}
           onPress={setRightIndent.bind(this, screenWidth)} />
       </Animated.View>
 
@@ -88,7 +86,7 @@ const OpenLeagues = ({ scrollToBottom }) => {
         }}
       >
         <ChooseCountry
-          step={'50%'}
+          step={'33%'}
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
           onNext={setRightIndent.bind(this, screenWidth * 2)}
@@ -111,18 +109,43 @@ const OpenLeagues = ({ scrollToBottom }) => {
         }}
       >
         <ChooseLeague
-          step={'100%'}
+          step={'66%'}
+          openClub
           selectedCountry={selectedCountry}
           selectedLeague={selectedLeague}
           setSelectedLeague={setSelectedLeague}
           onNext={setRightIndent.bind(this, screenWidth * 3)}
           onBack={setRightIndent.bind(this, screenWidth)} />
       </Animated.View>
-    </View>
+
+      <Animated.View
+        style={{
+          right: move,
+          height: currentScreenId === 3
+            ? grow.interpolate({
+              inputRange: [0, 100],
+              outputRange: [165, 200],
+            })
+            : grow.interpolate({
+              inputRange: [0, 100],
+              outputRange: [200, 165],
+            }),
+          ...styles.animatedView,
+        }}
+      >
+        <ChooseClub
+          step={'100%'}
+          openClub
+          selectedLeague={selectedLeague}
+          selectedClub={selectedClub}
+          setSelectedClub={setSelectedClub}
+          onBack={setRightIndent.bind(this, screenWidth * 2)} />
+      </Animated.View>
+    </View >
   )
 }
 
-export default OpenLeagues;
+export default OpenClub;
 
 const styles = StyleSheet.create({
   container: {
