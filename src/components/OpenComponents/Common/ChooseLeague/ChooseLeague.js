@@ -25,9 +25,10 @@ const ChooseLeague = (props) => {
   }, [])
 
   const onNextHandler = () => {
+    console.log(selectedTypeId);
     if (selectedTypeId === 0) props.onNext();       //if type (was choosed in prev-prev step) === Club
-    else if (selectedTypeId === 1) return navigation.navigate(this, 'LeagueFixtures', selectedLeague);   //if type === League
-    else if (selectedTypeId === undefined) return navigation.navigate(this, 'League', selectedLeague);
+    else if (selectedTypeId === 1) return navigation.navigate('LeagueFixtures', selectedLeague);   //if type === League
+    else if (selectedTypeId === undefined) return navigation.navigate('League', selectedLeague);
     return null;
   }
 

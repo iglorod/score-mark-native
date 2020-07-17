@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import FixtureItem from './FixtureItem/FixtureItem';
@@ -20,16 +20,15 @@ const FixturesItems = ({ fixtures }) => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={fixtures}
-        renderItem={({ item }) => (
+      {
+        fixtures.map((fixture, index) => (
           <FixtureItem
-            fixture={item}
+            key={index}
+            fixture={fixture}
             openClub={openClub}
-            onPress={openFixture.bind(this, item.fixture_id)} />
-        )}
-        keyExtractor={(item, key) => key}
-      />
+            onPress={openFixture.bind(this, fixture.fixture_id)} />
+        ))
+      }
     </View>
   )
 }

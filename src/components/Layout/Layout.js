@@ -9,6 +9,8 @@ import NewsScreens from '../../routes/NewsScreens';
 import ClubsScreens from '../../routes/ClubsScreens';
 import PlayersItems from '../PlayersItems/PlayersItems';
 import ClubFixtures from '../ClubFixtures/ClubFixtures';
+import LeagueFixtures from '../LeagueFixtures/LeagueFixtures';
+import TodayFixtures from '../TodayFixtures/TodayFixtures';
 
 const Layout = () => {
   const Stack = createStackNavigator();
@@ -19,6 +21,8 @@ const Layout = () => {
       <Stack.Screen name='News' component={NewsScreens} />
       <Stack.Screen name='Players' component={PlayersItems} />
       <Stack.Screen name='ClubFixtures' component={ClubFixtures} />
+      <Stack.Screen name='LeagueFixtures' component={LeagueFixtures} />
+      <Stack.Screen name='TodayFixtures' component={TodayFixtures} />
       <Stack.Screen name='LeaguesScreens' component={LeaguesScreens} />
       <Stack.Screen name='ClubsScreens' component={ClubsScreens} />
     </Stack.Navigator>
