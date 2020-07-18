@@ -11,6 +11,7 @@ const OpenLeague = ({ scrollToBottom }) => {
 
   const [selectedCountry, setSelectedCountry] = useState({});
   const [selectedLeague, setSelectedLeague] = useState({});
+  const [popularLeagueSelected, setPopularLeagueSelected] = useState(false);
 
   const move = useRef(new Animated.Value(rightIndent)).current;
   const grow = useRef(new Animated.Value(0)).current;
@@ -89,6 +90,10 @@ const OpenLeague = ({ scrollToBottom }) => {
       >
         <ChooseCountry
           step={'50%'}
+          selectedLeague={selectedLeague}
+          setSelectedLeague={setSelectedLeague}
+          openLeague={popularLeagueSelected}
+          setPopularLeagueSelected={setPopularLeagueSelected}
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
           onNext={setRightIndent.bind(this, screenWidth * 2)}

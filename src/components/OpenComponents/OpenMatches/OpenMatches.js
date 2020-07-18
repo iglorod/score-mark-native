@@ -14,6 +14,7 @@ const OpenMatches = () => {
   const [selectedTypeId, setSelectedTypeId] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState({});
   const [selectedLeague, setSelectedLeague] = useState({});
+  const [popularLeagueSelected, setPopularLeagueSelected] = useState(false);
   const [selectedClub, setSelectedClub] = useState({});
 
   const move = useRef(new Animated.Value(rightIndent)).current;
@@ -112,9 +113,13 @@ const OpenMatches = () => {
       >
         <ChooseCountry
           step={'50%'}
+          selectedLeague={selectedLeague}
+          setSelectedLeague={setSelectedLeague}
+          setPopularLeagueSelected={setPopularLeagueSelected}
           selectedCountry={selectedCountry}
+          openLeagueMatches={selectedTypeId === 1 && popularLeagueSelected}
           setSelectedCountry={setSelectedCountry}
-          onNext={setRightIndent.bind(this, screenWidth * 3)}
+          onNext={setRightIndent.bind(this, popularLeagueSelected ? screenWidth * 4 : screenWidth * 3)}
           onBack={setRightIndent.bind(this, screenWidth)} />
       </Animated.View>
 
@@ -163,7 +168,7 @@ const OpenMatches = () => {
           selectedLeague={selectedLeague}
           selectedClub={selectedClub}
           setSelectedClub={setSelectedClub}
-          onBack={setRightIndent.bind(this, screenWidth * 3)} />
+          onBack={setRightIndent.bind(this, popularLeagueSelected ? screenWidth * 2 : screenWidth * 3)} />
       </Animated.View>
     </View >
   )

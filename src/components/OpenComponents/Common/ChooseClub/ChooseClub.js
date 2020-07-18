@@ -18,11 +18,13 @@ const ChooseClub = (props) => {
   const nextButtonAvailible = Object.keys(props.selectedClub).length > 0;
 
   useEffect(() => {
+    if (!selectedLeague.league_id) return;
+
     fetchClubs(selectedLeague.league_id)
       .then(response => response.api.results.teams)
       .then(teams => setTeams(teams))
       .catch(error => console.log(error))
-  }, [])
+  }, [selectedLeague])
 
   let content = <FetchingSpinner color={colors.text} />;
   if (teams.length > 0) {

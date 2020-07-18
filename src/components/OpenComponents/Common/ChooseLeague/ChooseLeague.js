@@ -18,11 +18,13 @@ const ChooseLeague = (props) => {
   const nextButtonAvailible = Object.keys(props.selectedLeague).length > 0;
 
   useEffect(() => {
+    if (!selectedCountry.country) return;
+    
     LeagesByCountry(selectedCountry.country)
       .then(response => response.api.results.leagues)
       .then(leagues => setLeagues(leagues))
       .catch(error => console.log(error))
-  }, [])
+  }, [selectedCountry])
 
   const onNextHandler = () => {
     if (selectedTypeId === 0 || props.openClub) props.onNext();       //if type (was choosed in prev-prev step) === Club

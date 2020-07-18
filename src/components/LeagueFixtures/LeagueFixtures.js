@@ -56,7 +56,8 @@ const styles = StyleSheet.create({
   leagueData: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     shadowColor: '#fff',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.5,
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 70,
-    width: 70,
+    width: 50,
   },
   textContent: {
     width: '80%',

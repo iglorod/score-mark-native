@@ -1,22 +1,22 @@
 import React from 'react';
-import { Image, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { Image, ScrollView, StyleSheet } from 'react-native';
 
 import Avatar from '../UI/Avatar/Avatar';
 import { mostPopularLeagues } from '../../utility/compilation';
 
-const PopularLeagues = () => {
-  const navigation = useNavigation();
-
+const PopularLeagues = (props) => {
   return (
     <ScrollView contentContainerStyle={styles.container} horizontal>
       {
         mostPopularLeagues().map((league, index) => (
-          <TouchableOpacity key={index} onPress={navigation.navigate.bind(this, 'League', league)}>
-            <Avatar size={70}>
-              <Image style={styles.image} source={{ uri: league.logo }} />
-            </Avatar>
-          </TouchableOpacity>
+          <Avatar
+            key={index}
+            size={70}
+            selected={props.selectedLeague.league_id === league.league_id}
+            onPress={props.setSelectedLeague.bind(this, league)}
+          >
+            <Image style={styles.image} source={{ uri: league.logo }} />
+          </Avatar>
         ))
       }
     </ScrollView>

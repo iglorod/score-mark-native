@@ -12,6 +12,7 @@ const OpenClub = () => {
 
   const [selectedCountry, setSelectedCountry] = useState({});
   const [selectedLeague, setSelectedLeague] = useState({});
+  const [popularLeagueSelected, setPopularLeagueSelected] = useState(false);
   const [selectedClub, setSelectedClub] = useState({});
 
   const move = useRef(new Animated.Value(rightIndent)).current;
@@ -87,9 +88,12 @@ const OpenClub = () => {
       >
         <ChooseCountry
           step={'33%'}
+          selectedLeague={selectedLeague}
+          setSelectedLeague={setSelectedLeague}
+          setPopularLeagueSelected={setPopularLeagueSelected}
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
-          onNext={setRightIndent.bind(this, screenWidth * 2)}
+          onNext={setRightIndent.bind(this, popularLeagueSelected ? screenWidth * 3 : screenWidth * 2)}
           onBack={setRightIndent.bind(this, 0)} />
       </Animated.View>
 
@@ -139,7 +143,7 @@ const OpenClub = () => {
           selectedLeague={selectedLeague}
           selectedClub={selectedClub}
           setSelectedClub={setSelectedClub}
-          onBack={setRightIndent.bind(this, screenWidth * 2)} />
+          onBack={setRightIndent.bind(this, popularLeagueSelected ? screenWidth : screenWidth * 2)} />
       </Animated.View>
     </View >
   )
