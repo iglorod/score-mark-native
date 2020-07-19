@@ -68,6 +68,7 @@ const OpenMatches = () => {
       >
         <OpenSkeleton
           title={'Matches'}
+          subTitle={'Matches list from different sources'}
           buttonLabel={'NEXT'}
           image={require('../../../assets/images/openMatches.png')}
           onPress={setRightIndent.bind(this, screenWidth)} />

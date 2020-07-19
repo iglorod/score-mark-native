@@ -29,7 +29,7 @@ const ChooseLeague = (props) => {
   const onNextHandler = () => {
     if (selectedTypeId === 0 || props.openClub) props.onNext();       //if type (was choosed in prev-prev step) === Club
     else if (selectedTypeId === 1) navigation.navigate('LeagueFixtures', selectedLeague);   //if type === League
-    else if (props.openLeague) navigation.navigate('League', selectedLeague);
+    else if (props.openLeague) navigation.navigate('LeagueScreens', selectedLeague);
   }
 
   let content = <FetchingSpinner color={colors.text} />;

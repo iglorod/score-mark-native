@@ -68,6 +68,7 @@ const OpenLeague = ({ scrollToBottom }) => {
       >
         <OpenSkeleton
           title={'Leagues'}
+          subTitle={'Select the league you are interested in'}
           buttonLabel={'NEXT'}
           image={require('../../../assets/images/openLeagues.png')}
           onPress={setRightIndent.bind(this, screenWidth)} />

@@ -4,13 +4,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Navbar from '../Navbar/Navbar';
 import Main from '../Main/Main';
-import LeaguesScreens from '../../routes/LeaguesScreens';
 import NewsScreens from '../../routes/NewsScreens';
 import ClubsScreens from '../../routes/ClubsScreens';
 import PlayersItems from '../PlayersItems/PlayersItems';
 import ClubFixtures from '../ClubFixtures/ClubFixtures';
-import LeagueFixtures from '../LeagueFixtures/LeagueFixtures';
 import TodayFixtures from '../TodayFixtures/TodayFixtures';
+import LeagueFixtures from '../LeagueFixtures/LeagueFixtures';
+import LeagueScreens from '../../routes/LeagueScreens';
 
 const Layout = () => {
   const Stack = createStackNavigator();
@@ -23,7 +23,7 @@ const Layout = () => {
       <Stack.Screen name='ClubFixtures' component={ClubFixtures} />
       <Stack.Screen name='LeagueFixtures' component={LeagueFixtures} />
       <Stack.Screen name='TodayFixtures' component={TodayFixtures} />
-      <Stack.Screen name='LeaguesScreens' component={LeaguesScreens} />
+      <Stack.Screen name='LeagueScreens' component={LeagueScreens} />
       <Stack.Screen name='ClubsScreens' component={ClubsScreens} />
     </Stack.Navigator>
   );

@@ -20,10 +20,12 @@ const Main = ({ navigation }) => {
     >
       <OpenSkeleton
         title={'News Feed'}
+        subTitle={'Latest news from your country'}
         image={require('../../assets/images/openNews.png')}
         onPress={navigation.navigate.bind(this, 'News')} />
       <OpenSkeleton
         title={'Players'}
+        subTitle={'Full statistics about specific player'}
         image={require('../../assets/images/openPlayers.png')}
         onPress={navigation.navigate.bind(this, 'Players')} />
 

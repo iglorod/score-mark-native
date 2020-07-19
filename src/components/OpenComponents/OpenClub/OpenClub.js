@@ -66,6 +66,7 @@ const OpenClub = () => {
       >
         <OpenSkeleton
           title={'Clubs'}
+          subTitle={'Select the club you are interested in'}
           buttonLabel={'NEXT'}
           image={require('../../../assets/images/openClubs.png')}
           onPress={setRightIndent.bind(this, screenWidth)} />

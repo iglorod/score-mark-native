@@ -6,11 +6,11 @@ const GoalsStats = ({ player }) => {
     <View style={styles.goalsStats}>
       <View style={styles.itemContainer}>
         <Text style={styles.totalGoals}>{player.goals.total}</Text>
-        <Text>Scored</Text>
+        <Text style={styles.label}>Scored</Text>
       </View>
       <View style={styles.itemContainer}>
         <Text style={styles.assistsGoals}>{player.goals.assists}</Text>
-        <Text>Assists</Text>
+        <Text style={styles.label}>Assists</Text>
       </View>
     </View>
   )
@@ -30,13 +30,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   totalGoals: {
-    color: '#000',
+    color: '#fff',
     fontSize: 24,
     paddingRight: 5,
   },
   assistsGoals: {
-    color: '#000',
+    color: '#fff',
     fontSize: 20,
     paddingRight: 5,
+  },
+  label: {
+    color: '#fff',
   }
 })

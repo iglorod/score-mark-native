@@ -5,6 +5,7 @@ export const MyTheme = {
     background: '#415861',
     secondaryBackground: '#7CC47F',
     secondaryBackgroundOpacity: '#DFF0DF',
+    thirdBackground: '#4BB6A9',
     card: '#fff',
     text: '#415861',
     secondaryText: '#7CC47F',

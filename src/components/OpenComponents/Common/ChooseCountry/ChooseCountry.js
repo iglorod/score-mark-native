@@ -24,7 +24,7 @@ const ChooseCountry = (props) => {
 
   const onNextHandler = () => {
     if (nextButtonAvailible && props.openLeague) {
-      navigation.navigate('League', props.selectedLeague);
+      navigation.navigate('LeagueScreens', props.selectedLeague);
     } else if (nextButtonAvailible && props.openLeagueMatches) {
       navigation.navigate('LeagueFixtures', props.selectedLeague);
     } else if (nextButtonAvailible) {

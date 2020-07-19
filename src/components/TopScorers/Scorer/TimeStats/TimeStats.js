@@ -5,7 +5,7 @@ const TimeStats = ({ player }) => {
   return (
     <View style={styles.timeStats}>
       <View>
-        <Text style={styles.value}>{player.team_name}</Text>
+        <Text style={styles.teamName}>{player.team_name}</Text>
       </View>
       <View style={styles.itemContainer}>
         <Text style={styles.value}>{player.games.appearences}</Text>
@@ -26,17 +26,22 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     textAlign: 'left',
+    fontFamily: 'OpenSans-Regular',
   },
   value: {
-    color: 'rgba(0, 0, 0, 0.85)',
+    color: '#fff',
   },
   label: {
-    color: 'rgba(0, 0, 0, 0.65)',
+    color: '#eee',
     paddingHorizontal: 5,
   },
   itemContainer: {
     display: 'flex',
     flexDirection: 'row',
     marginTop: 10,
+  },
+  teamName: {
+    color: '#fff',
+    fontFamily: 'OpenSans-SemiBold',
   }
 })

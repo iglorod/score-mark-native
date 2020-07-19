@@ -1,19 +1,27 @@
+/* eslint-disable react/display-name */
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { Table, Row, Rows } from 'react-native-table-component';
+import { useTheme } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import ModalSpinner from '../UI/ModalSpinner/ModalSpinner';
-import { leagueStatnding } from '../../FakeData/FakeData';
 
-const Standing = ({ route }) => {
+const Standing = ({ navigation, route }) => {
   const [teamsData, setTeamsData] = useState([]);
   const [leagueData, setLeagueData] = useState({});
 
+  const standing = route.params;
+  const { colors } = useTheme();
+
+  navigation.setOptions({
+    headerStyle: {
+      backgroundColor: 'red',
+    }
+  })
+
   useEffect(() => {
-    leagueStatnding(route.params.id)
-      .then(response => response.api.results.standings)
-      .then(data => moveTeamDataToTable(data))
-      .catch(error => console.log(error))
+    moveTeamDataToTable(standing);
   }, [])
 
   const moveTeamDataToTable = (data) => {
@@ -45,11 +53,17 @@ const Standing = ({ route }) => {
 
   return (
     <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.tableTitle}>
-          <Text style={styles.leagueName}>{leagueData.name}</Text>
-          <Text style={styles.leagueDescription}>{leagueData.description}</Text>
+      <View style={[styles.container, { backgroundColor: colors.thirdBackground }]}>
+        <View style={styles.header}>
+          <View style={styles.tableTitle}>
+            <Text style={styles.leagueName}>{leagueData.name}</Text>
+            <Text style={styles.leagueDescription}>{leagueData.description}</Text>
+          </View>
+          <Icon name={'table'} color={'#fff'} size={35} />
         </View>
+      </View>
+
+      <View style={[styles.container, { backgroundColor: colors.secondaryBackground }]}>
         <Table>
           <Row data={tableHead} style={styles.head} textStyle={styles.text} />
           <Rows data={teamsData} textStyle={styles.text} />
@@ -65,11 +79,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 15,
-    backgroundColor: '#fff',
+    margin: 15,
+    borderRadius: 5,
+    fontFamily: 'OpenSans-Regular',
   },
   head: {
     height: 40,
-    backgroundColor: '#fafafa',
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    borderRadius: 5,
   },
   text: {
     margin: 6,
@@ -85,10 +102,15 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   leagueName: {
-    fontSize: 18,
+    color: '#fff',
+    fontSize: 22,
   },
   leagueDescription: {
-    fontSize: 12,
-    color: 'rgba(0, 0, 0, 0.45)',
+    color: '#fff',
+    fontSize: 14,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   }
 })
