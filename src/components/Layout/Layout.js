@@ -16,7 +16,7 @@ const Layout = () => {
   const Stack = createStackNavigator();
 
   return (
-    <Stack.Navigator initialRouteName='Main' screenOptions={{ header: Navbar }}>
+    <Stack.Navigator initialRouteName='Main' screenOptions={{ header: (props) => <Navbar {...props} /> }}>
       <Stack.Screen name='Main' component={Main} />
       <Stack.Screen name='News' component={NewsScreens} />
       <Stack.Screen name='Players' component={PlayersItems} />

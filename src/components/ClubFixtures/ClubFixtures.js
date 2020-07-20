@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useTheme } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import FixtureItem from '../FixturesItems/FixturesItems';
 import FetchingSpinner from '../UI/FetchingSpinner/FetchingSpinner';
+import { setLastClubActionCreator } from '../../store/navbar/actions';
 import { todayFixtures } from '../../FakeData/FakeData';
 
-const ClubFixtures = ({ route }) => {
+const ClubFixtures = (props) => {
   const [fixtures, setFixtures] = useState([]);
 
+  const { route } = props;
   const { colors } = useTheme();
 
   useEffect(() => {
@@ -17,7 +21,10 @@ const ClubFixtures = ({ route }) => {
       .then(response => response.api.results.fixtures)
       .then(fixtures => setFixtures(fixtures))
       .catch(error => console.log(error))
-  }, [])
+
+    AsyncStorage.setItem('LAST_CLUB', JSON.stringify(route.params))
+    props.setLastClub(route.params);
+  }, [props.setLastClub])
 
   let content = <FetchingSpinner color={'#fff'} />;
   if (fixtures.length > 0) {
@@ -46,7 +53,13 @@ const ClubFixtures = ({ route }) => {
   )
 }
 
-export default ClubFixtures;
+const mapDispatchToProps = dispatch => {
+  return {
+    setLastClub: (club) => { dispatch(setLastClubActionCreator(club)) },
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ClubFixtures);
 
 const styles = StyleSheet.create({
   container: {

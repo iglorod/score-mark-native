@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
 import { useTheme } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import OpenLargeSkeleton from '../UI/OpenLargeSkeleton/OpenLargeSkeleton';
 import ModalSpinner from '../UI/ModalSpinner/ModalSpinner';
+import { setLastLeagueActionCreator } from '../../store/navbar/actions';
 import { leagueStatnding, topScorers } from '../../FakeData/FakeData';
 
-const LeagueMain = ({ navigation, route }) => {
+const LeagueMain = (props) => {
   const [standing, setStanding] = useState(null);
   const [scorers, setScorers] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const { colors } = useTheme();
+  const { navigation, route } = props;
 
   useEffect(() => {
     const leagueId = route.params.league_id;
@@ -27,7 +31,10 @@ const LeagueMain = ({ navigation, route }) => {
       })
       .then(() => setLoading(false))
       .catch(error => console.log(error.message))
-  }, [])
+
+    AsyncStorage.setItem('LAST_LEAGUE', JSON.stringify(route.params))
+    props.setLastLeague(route.params);
+  }, [props.setLastLeague])
 
   if (loading) return <ModalSpinner />;
 
@@ -61,7 +68,13 @@ const LeagueMain = ({ navigation, route }) => {
   )
 }
 
-export default LeagueMain;
+const mapDispatchToProps = dispatch => {
+  return {
+    setLastLeague: (league) => { dispatch(setLastLeagueActionCreator(league)) },
+  }
+}
+
+export default connect(null, mapDispatchToProps)(LeagueMain);
 
 const styles = StyleSheet.create({
   container: {

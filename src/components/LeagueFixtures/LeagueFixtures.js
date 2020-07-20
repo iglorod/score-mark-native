@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useTheme } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import FixtureItem from '../FixturesItems/FixturesItems';
 import FetchingSpinner from '../UI/FetchingSpinner/FetchingSpinner';
+import { setLastLeagueActionCreator } from '../../store/navbar/actions';
 import { todayFixtures } from '../../FakeData/FakeData';
 
-const LeagueFixtures = ({ route }) => {
+const LeagueFixtures = (props) => {
   const [fixtures, setFixtures] = useState([]);
 
   const { colors } = useTheme();
+  const { route } = props;
 
   useEffect(() => {
     todayFixtures(route.params.league_id)
       .then(response => response.api.results.fixtures)
       .then(fixtures => setFixtures(fixtures))
       .catch(error => console.log(error))
-  }, [])
+
+    AsyncStorage.setItem('LAST_LEAGUE', JSON.stringify(route.params))
+    props.setLastLeague(route.params);
+  }, [props.setLastLeague])
 
   let content = <FetchingSpinner color={'#fff'} />;
   if (fixtures.length > 0) {
@@ -46,7 +53,13 @@ const LeagueFixtures = ({ route }) => {
   )
 }
 
-export default LeagueFixtures;
+const mapDispatchToProps = dispatch => {
+  return {
+    setLastLeague: (league) => { dispatch(setLastLeagueActionCreator(league)) },
+  }
+}
+
+export default connect(null, mapDispatchToProps)(LeagueFixtures);
 
 const styles = StyleSheet.create({
   container: {

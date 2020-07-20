@@ -12,6 +12,7 @@ import clubReducer from './src/store/club/reducer';
 import fixtureReducer from './src/store/fixture/reducer';
 import playerReducer from './src/store/player/reducer';
 import commentReducer from './src/store/comment/reducer';
+import navbarReducer from './src/store/navbar/reducer';
 import Layout from './src/components/Layout/Layout';
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
@@ -52,6 +53,7 @@ const App = () => {
     fxt: fixtureReducer,
     plr: playerReducer,
     cmnt: commentReducer,
+    nvb: navbarReducer,
   }), applyMiddleware(thunk))
 
   return (
