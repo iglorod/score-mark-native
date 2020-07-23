@@ -12,7 +12,7 @@ const FixturesItems = ({ fixtures }) => {
   }, [])
 
   const openClub = useCallback((club) => {
-    navigation.navigate('ClubsScreens', {
+    navigation.navigate('ClubScreens', {
       screen: 'Club',
       params: club,
     })

@@ -1,18 +1,24 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 
 import StatsTooltip from './StatsTooltip/StatsTooltip';
 
-const Player = ({ player, openPlayer }) => {
+const Player = ({ player, openPlayer, index }) => {
+  const { colors } = useTheme();
+
   return (
-    <View style={styles.player}>
+    <View style={[
+      styles.player,
+      { backgroundColor: (index % 2 === 0) ? colors.secondaryBackground : colors.thirdBackground }
+    ]}>
       <View>
         <Text style={styles.playerName} onPress={openPlayer}>{player.firstname} {player.lastname}</Text>
         <Text style={styles.playerAgeAndPos}>{player.age} y.o., {player.position}</Text>
       </View>
 
-      <Text>{player.height}</Text>
-      <Text>{player.weight}</Text>
+      <Text style={styles.whiteText}>{player.height}</Text>
+      <Text style={styles.whiteText}>{player.weight}</Text>
 
       <StatsTooltip text={'Minutes played'} data={player.games.minutes_played} />
       <StatsTooltip text={'Goals'} data={player.goals.total || '-'} />
@@ -37,21 +43,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(0,0,0,0.1)',
+    padding: 15,
+    margin: 10,
+    borderRadius: 5,
   },
   order: {
-    color: '#000',
+    color: '#fff',
   },
   playerName: {
-    color: '#000',
+    color: '#fff',
+    fontSize: 16,
   },
   playerAgeAndPos: {
+    color: '#fff',
     fontSize: 12,
   },
   rating: {
-    color: '#f57922',
+    color: '#fff',
+    fontFamily: 'OpenSans-SemiBold',
+  },
+  whiteText: {
+    color: '#fff',
+    fontSize: 16,
   }
 })

@@ -49,5 +49,9 @@ const styles = StyleSheet.create({
   },
   comments: {
     margin: 10,
+    marginTop: 25,
+    padding: 15,
+    backgroundColor: '#fff',
+    borderRadius: 5,
   }
 })

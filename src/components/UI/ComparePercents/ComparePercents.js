@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 
 const ComparePercents = ({ title, first, last }) => {
+  const { colors } = useTheme();
+
   let leftWidth = first || '0';
   let rightWidth = last || '0';
 
@@ -20,10 +23,10 @@ const ComparePercents = ({ title, first, last }) => {
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.percents}>
-        <View style={{ width: leftWidth, ...styles.firstPercents }}>
+        <View style={{ width: leftWidth, ...styles.firstPercents, backgroundColor: colors.secondaryBackground }}>
           <Text style={styles.value}>{first}</Text>
         </View>
-        <View style={{ width: rightWidth, ...styles.lastPercents }}>
+        <View style={{ width: rightWidth, ...styles.lastPercents, backgroundColor: colors.thirdBackground }}>
           <Text style={styles.value}>{last}</Text>
         </View>
       </View>
@@ -41,7 +44,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    color: '#000',
+    color: '#fff',
     fontSize: 12,
     fontWeight: 'bold',
     marginTop: 15,
@@ -52,14 +55,12 @@ const styles = StyleSheet.create({
     marginRight: 2,
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
-    backgroundColor: '#138B86',
   },
   lastPercents: {
     textAlign: 'right',
     height: 26,
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
-    backgroundColor: '#F6AE2D',
   },
   percents: {
     display: 'flex',

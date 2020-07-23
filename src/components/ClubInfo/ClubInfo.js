@@ -1,19 +1,16 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { useTheme } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import ModalSpinner from '../UI/ModalSpinner/ModalSpinner';
 import BriefStats from './BriefStats/BriefStats';
 
 const ClubInfo = ({ club }) => {
-  const { colors } = useTheme();
-
   if (!club) return <ModalSpinner />;
 
   return (
-    <View style={{ ...styles.clubInfo, backgroundColor: colors.primary }}>
+    <View style={{ ...styles.clubInfo, backgroundColor: '#F96F5D' }}>
       <View style={styles.logoContainer}>
         <Image style={styles.image} source={{ uri: club.logo }} />
       </View>
@@ -51,7 +48,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginTop: 70,
     marginBottom: 25,
-    marginHorizontal: 5,
+    marginHorizontal: 10,
     minWidth: 235,
     borderRadius: 5,
   },

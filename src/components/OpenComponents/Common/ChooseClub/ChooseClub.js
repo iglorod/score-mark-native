@@ -48,9 +48,10 @@ const ChooseClub = (props) => {
 
   const onNextHandler = () => {
     if (props.openClub) {
-      navigation.navigate('Club', selectedClub)
+      navigation.navigate('ClubScreens', selectedClub)
+    } else {
+      navigation.navigate('ClubFixtures', selectedClub)
     }
-    navigation.navigate('ClubFixtures', selectedClub)
   }
 
   return (

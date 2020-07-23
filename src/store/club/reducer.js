@@ -40,7 +40,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SET_CLUB_SQUAD: {
       return {
         ...state,
-        players: { ...action.players },
+        players: [...action.players ],
       }
     }
 

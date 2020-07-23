@@ -63,5 +63,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(ClubStats);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginHorizontal: 5,
   }
 })

@@ -58,19 +58,23 @@ export const fetchClubStatsActionCreator = () => {
   return dispatch => {
     //axios.get(`https://api-football-v1.p.rapidapi.com/v2/fixtures/date/2020-02-06`)
     // .then(response => response.data.api.results.fixtures)
+    dispatch(startLoadingActionCreator());
     fetchTeamStats()
       .then(response => response.api.results.statistics)
       .then(stats => dispatch(setClubStatsActionCreator(stats)))
+      .then(() => dispatch(finishLoadingActionCreator()))
       .catch(error => console.log(error))
   }
 }
 
 export const fetchClubSquadActionCreator = () => {
   return dispatch => {
+    dispatch(startLoadingActionCreator());
     fetchTeamSquard()
       .then(response => response.api.results.players)
       .then(players => Promise.all(players.map(player => fetchPlayerDetails(player.player_id))))
       .then(players => dispatch(setClubSquadActionCreator(players)))
+      .then(() => dispatch(finishLoadingActionCreator()))
       .catch(error => console.log(error))
   }
 }

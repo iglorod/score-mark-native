@@ -1,18 +1,18 @@
-/* eslint-disable react/display-name */
 import React, { useEffect } from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 import { connect } from 'react-redux';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import ClubMain from '../components/ClubMain/ClubMain';
+import WithComments from '../components/UI/WithComments/WithComments';
 import ClubSquad from '../components/ClubSquad/ClubSquad';
 import ClubStats from '../components/ClubStats/ClubStats';
-import WithComments from '../components/UI/WithComments/WithComments';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { fetchClubActionCreator } from '../store/club/actions';
-import { clearClubDataActionCreator } from '../store/club/actions';
 import { openCommentsActionCreator, closeCommentsActionCreator } from '../store/comment/actions';
+import { fetchClubActionCreator, clearClubDataActionCreator } from '../store/club/actions';
 
 const ClubScreens = (props) => {
-  const Tab = createBottomTabNavigator();
+  const Stack = createStackNavigator();
+
+  const { route } = props;
 
   useEffect(() => {
     //get club id from props.route.params.team_id
@@ -26,7 +26,7 @@ const ClubScreens = (props) => {
   useEffect(() => {
     if (!props.club) return;
 
-    const clubId = props.club.team_id;
+    const clubId = route.params.team_id;
     props.openComments(`http://localhost:3000/club/${clubId}`, clubId.toString(), 'Club');
 
     return () => {
@@ -35,28 +35,16 @@ const ClubScreens = (props) => {
   }, [props.club, props.openComments, props.closeComments])
 
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+    <Stack.Navigator initialRouteName='ClubMain'>
+      <Stack.Screen name='ClubMain' component={ClubMain} initialParams={route.params} />
 
-          if (route.name === 'Squad') {
-            iconName = 'view-list';
-          } else if (route.name === 'Stats') {
-            iconName = focused ? 'swap-horizontal-bold' : 'swap-horizontal';
-          }
-
-          return <Icon name={iconName} size={size} color={color} />;
-        },
-      })}
-    >
-      <Tab.Screen name='Squad'>
+      <Stack.Screen name='Squad'>
         {() => <WithComments showComments={!(props.players.length === 0)}><ClubSquad /></WithComments>}
-      </Tab.Screen>
-      <Tab.Screen name='Stats'>
+      </Stack.Screen>
+      <Stack.Screen name='Stats'>
         {() => <WithComments showComments={!!props.stats}><ClubStats /></WithComments>}
-      </Tab.Screen>
-    </Tab.Navigator>
+      </Stack.Screen>
+    </Stack.Navigator>
   )
 }
 
