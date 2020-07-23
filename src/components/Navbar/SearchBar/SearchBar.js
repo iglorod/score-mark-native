@@ -38,6 +38,7 @@ const SearchBar = ({ isOpen, close }) => {
       close();
       return true;
     }
+
     return false;
   }
 
