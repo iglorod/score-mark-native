@@ -1,11 +1,14 @@
 import React from 'react';
 import { ImageBackground, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import { useTheme } from '@react-navigation/native';
 
 import Team from './Team/Team';
 
 const Formation = ({ fixture }) => {
   const HomeTeamName = fixture.homeTeam.team_name;
+  const { colors } = useTheme();
+
   const homePlayersStats = fixture.players.reduce((resultPlayers, player) => {
     if (player.team_name === HomeTeamName) {
       resultPlayers.push(player);
@@ -24,7 +27,7 @@ const Formation = ({ fixture }) => {
   return (
     <ImageBackground
       source={require('../../../assets/images/field.jpg')}
-      style={styles.field}
+      style={[styles.field, {borderColor: colors.background}]}
     >
       <Team
         formation={fixture.lineups[HomeTeamName].formation}
@@ -53,6 +56,5 @@ const styles = StyleSheet.create({
     height: 371,
     width: '100%',
     borderWidth: 5,
-    borderColor: '#fff',
   }
 })

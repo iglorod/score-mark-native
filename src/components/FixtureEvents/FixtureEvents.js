@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
+import { useTheme, useNavigation } from '@react-navigation/native';
 
 import Event from './Event/Event';
 
 const FixtureEvents = ({ fixture }) => {
+  const { colors } = useTheme();
   const navigation = useNavigation();
 
   const homeTeam = fixture.homeTeam;
@@ -17,15 +18,16 @@ const FixtureEvents = ({ fixture }) => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={fixture.events}
-        renderItem={({ item }) => (
+      {
+        fixture.events.map((event, index) => (
           <Event
-            event={item}
-            team={item.team_id === homeTeam.team_id ? homeTeam : awayTeam}
-            onPress={openPlayer.bind(this, item.player_id)} />
-        )}
-        keyExtractor={(item, key) => key} />
+            key={index}
+            event={event}
+            team={event.team_id === homeTeam.team_id ? homeTeam : awayTeam}
+            backgroundColor={(index % 2 === 0) ? colors.secondaryBackground : colors.thirdBackground}
+            onPress={openPlayer.bind(this, event.player_id)} />
+        ))
+      }
     </View>
   )
 }

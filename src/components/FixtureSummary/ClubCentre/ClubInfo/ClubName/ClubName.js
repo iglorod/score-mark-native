@@ -16,7 +16,7 @@ export default ClubName;
 
 const styles = StyleSheet.create({
   clubName: {
-    color: '#000',
+    color: '#fff',
     fontSize: 20,
     fontFamily: 'OpenSans-Regular',
   }

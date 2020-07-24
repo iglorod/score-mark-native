@@ -12,7 +12,7 @@ const Bookmaker = ({ bookmakerName }) => {
         <Text style={styles.bookmakerPage} onPress={openUrlHandler.bind(this, `https://${bookmakerName.split(' ').join('')}.com`)}>
           {'Visit site'}
         </Text>
-        <Icon name={'open-in-new'} size={15} color={'#1890ff'} />
+        <Icon name={'open-in-new'} size={15} color={'#fff'} />
       </View>
     </View>
   )
@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
     width: 100,
   },
   bookmakerName: {
-    color: '#000',
+    color: '#fff',
     fontSize: 22,
   },
   bookmakerPage: {
-    color: '#1890ff',
+    color: '#fff',
     marginTop: 5,
     paddingRight: 5,
   },

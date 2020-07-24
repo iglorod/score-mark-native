@@ -8,7 +8,8 @@ import SearchResults from './SearchResults/SearchResults';
 
 const SearchBar = ({ isOpen, close }) => {
   const [searchText, setSearchText] = useState('');
-  
+  const [portraitOrientation, setPortraitOrientation] = useState(true);
+
   const { colors } = useTheme();
   const input = useRef(null);
   const appear = useRef(new Animated.Value(Dimensions.get('window').width)).current;
@@ -17,6 +18,7 @@ const SearchBar = ({ isOpen, close }) => {
   useEffect(() => {
     appearAnimation();
     appearResultsAnimation();
+
     if (isOpen === false) {
       setTimeout(() => {
         setSearchText('');
@@ -25,11 +27,14 @@ const SearchBar = ({ isOpen, close }) => {
     } else {
       input.current.focus();
     }
-  }, [isOpen])
-
+  }, [isOpen, portraitOrientation])
+  
   useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', onBackPressHandler);
+    Dimensions.addEventListener('change', getOrientation);
     return () => {
       BackHandler.removeEventListener('hardwareBackPress', onBackPressHandler);
+      Dimensions.removeEventListener('change', getOrientation);
     }
   }, [])
 
@@ -42,13 +47,22 @@ const SearchBar = ({ isOpen, close }) => {
     return false;
   }
 
-  BackHandler.addEventListener('hardwareBackPress', onBackPressHandler);
+
+  const getOrientation = () => {
+
+    if (Dimensions.get('window').width < Dimensions.get('window').height) {
+      setPortraitOrientation(true);
+    }
+    else {
+      setPortraitOrientation(false);
+    }
+  }
 
   const appearAnimation = () => {
     Animated.timing(
       appear,
       {
-        toValue: isOpen ? 10 : Dimensions.get('window').width,
+        toValue: isOpen ? 10 : Dimensions.get('window').width * 2,
         duration: 700,
         useNativeDriver: false,
         easing: Easing.ease
@@ -70,7 +84,13 @@ const SearchBar = ({ isOpen, close }) => {
 
   return (
     <>
-      <Animated.View style={[styles.inputContainer, { width: Dimensions.get('window').width - 20, left: appear }]}>
+      <Animated.View style={[
+        styles.inputContainer,
+        {
+          width: Dimensions.get('window').width - 20,
+          left: appear
+        }
+      ]}>
         <TouchableOpacity onPress={close}>
           <Icon name={'keyboard-arrow-right'} style={styles.icon} size={30} color={'#BFBCB6'} />
         </TouchableOpacity>

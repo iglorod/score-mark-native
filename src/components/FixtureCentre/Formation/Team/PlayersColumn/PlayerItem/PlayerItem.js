@@ -1,19 +1,21 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 
 const PlayerItem = (props) => {
   const { player, away, selectedPlayerId } = props;
+  const { colors } = useTheme();
 
   let avatarStyle = { ...styles.playerAvatar };
   if (away) {
     avatarStyle = {
       ...avatarStyle,
-      ...styles.mainColorAvatar,
+      backgroundColor: colors.secondaryBackground,
     };
   } else {
     avatarStyle = {
       ...avatarStyle,
-      ...styles.secondColorAvatar,
+      backgroundColor: colors.thirdBackground,
     };
   }
 
@@ -26,7 +28,7 @@ const PlayerItem = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={avatarStyle} onPress={props.selectPlayer}>{player.playerStats.rating}</Text>
+      <Text style={[avatarStyle, { color: '#fff' }]} onPress={props.selectPlayer}>{player.playerStats.rating}</Text>
       <View style={styles.playerData}>
         <Text style={styles.playerNumber} numberOfLines={2}>{player.number}. {player.player}</Text>
       </View>
@@ -48,12 +50,6 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     borderRadius: 150,
   },
-  mainColorAvatar: {
-    backgroundColor: '#F6AE2D',
-  },
-  secondColorAvatar: {
-    backgroundColor: '#138B86',
-  },
   playerData: {
     color: '#fff',
     fontSize: 10,
@@ -61,7 +57,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
   },
   playerNumber: {
-    color: '#e8e8e8',
+    color: '#fff',
     width: '100%',
     paddingHorizontal: 5,
   },

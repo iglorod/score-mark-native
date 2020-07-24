@@ -24,12 +24,12 @@ const Odd = ({ odd }) => {
             <View style={styles.odd} key={index}>
               <View style={styles.oddTitle}>
                 <Text style={styles.coefLabel} numberOfLines={1}>{item.value}</Text>
-                <Text>Coef</Text>
+                <Text style={styles.coefLabel}>Coef</Text>
               </View>
               <View style={styles.oddLabels}>
                 <View style={styles.oddValueProgress}>
                   <ProgressBar
-                    color={colors.primary}
+                    color={colors.secondaryBackground}
                     style={styles.progressBar}
                     styleAttr='Horizontal'
                     indeterminate={false}
@@ -53,10 +53,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#999',
+    borderBottomColor: '#fff',
   },
   oddName: {
-    color: 'rgba(0, 0, 0, 0.85)',
+    color: '#fff',
     fontSize: 16,
     fontStyle: 'italic',
     textAlign: 'center',
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     width: 170,
   },
   coefLabel: {
+    color: '#fff',
     width: 120,
   },
   oddLabels: {
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
     width: 120,
   },
   oddValue: {
-    color: '#000',
+    color: '#fff',
     fontSize: 16,
   },
   progressBar: {

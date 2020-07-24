@@ -1,15 +1,14 @@
 /* eslint-disable react/display-name */
 import React, { useEffect } from 'react';
-import { View, Image, Text, StyleSheet } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import { connect } from 'react-redux';
 
+import FixtureMain from '../components/FixtureMain/FixtureMain';
 import FixtureStats from '../components/FixtureStats/FixtureStats';
 import FixtureEvents from '../components/FixtureEvents/FixtureEvents';
 import FixtureCentre from '../components/FixtureCentre/FixtureCentre';
 import FixtureOdds from '../components/FixtureOdds/FixtureOdds';
 import WithComments from '../components/UI/WithComments/WithComments';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ModalSpinner from '../components/UI/ModalSpinner/ModalSpinner';
 import { fetchFixturesActionCreator, clearFixtureActionCreator } from '../store/fixture/actions';
 import { openCommentsActionCreator, closeCommentsActionCreator } from '../store/comment/actions';
@@ -17,7 +16,7 @@ import { openCommentsActionCreator, closeCommentsActionCreator } from '../store/
 const FixtureScreens = (props) => {
   const { route } = props;
 
-  const Tab = createBottomTabNavigator();
+  const Stack = createStackNavigator();
   const fixtureId = route.params.id;
 
   useEffect(() => {
@@ -39,54 +38,30 @@ const FixtureScreens = (props) => {
     }
   }, [props.fixture, props.openComments, props.closeComments])
 
-  // if (props.loading) {
-  //   navigation.setOptions({ title: 'Fixture Summary' });
-  //   return <ModalSpinner />;
-  // } else {
-  //   navigation.setOptions({
-  //     title: (
-  //       <View style={styles.titleContainer}>
-  //         <Image style={styles.image} sourse={{ uri: props.fixture.homeTeam.logo }} />
-  //         <Text style={styles.text}> - </Text>
-  //         <Image style={styles.image} sourse={{ uri: props.fixture.awayTeam.logo }} />
-  //       </View>
-  //     )
-  //   });
-  // }
-
   if (props.loading) return <ModalSpinner />;
 
+  // if (route.name === 'Stats') {
+  //   iconName = focused ? 'swap-horizontal-bold' : 'swap-horizontal';
+  // } else if (route.name === 'Centre') {
+  //   iconName = 'chart-bubble';
+  // } else if (route.name === 'Events') {
+  //   iconName = focused ? 'microphone' : 'microphone-outline';
+  // } else if (route.name === 'Odds') {
+  //   iconName = 'chart-pie';
+
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+    <Stack.Navigator initialRouteName='FixtureMain'>
+      <Stack.Screen name='FixtureMain' component={FixtureMain} initialParams={route.params} />
 
-          if (route.name === 'Stats') {
-            iconName = focused ? 'swap-horizontal-bold' : 'swap-horizontal';
-          } else if (route.name === 'Centre') {
-            iconName = 'chart-bubble';
-          } else if (route.name === 'Events') {
-            iconName = focused ? 'microphone' : 'microphone-outline';
-          } else if (route.name === 'Odds') {
-            iconName = 'chart-pie';
-          }
-
-          return <Icon name={iconName} size={size} color={color} />;
-        },
-      })}
-    >
-      <Tab.Screen name='Stats'>
+      <Stack.Screen name='Stats'>
         {() => <WithComments showComments><FixtureStats /></WithComments>}
-      </Tab.Screen>
-      <Tab.Screen name='Centre'>
-        {() => <FixtureCentre />}
-      </Tab.Screen>
-      <Tab.Screen name='Events'>
+      </Stack.Screen>
+      <Stack.Screen name='Centre' component={FixtureCentre} />
+      <Stack.Screen name='Events'>
         {() => <WithComments showComments><FixtureEvents /></WithComments>}
-      </Tab.Screen>
-      <Tab.Screen name='Odds' component={FixtureOdds} />
-    </Tab.Navigator>
+      </Stack.Screen>
+      <Stack.Screen name='Odds' component={FixtureOdds} />
+    </Stack.Navigator>
   )
 }
 
@@ -107,19 +82,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FixtureScreens);
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  image: {
-    height: 50,
-    width: 50,
-  },
-  text: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-  }
-})

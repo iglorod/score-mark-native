@@ -1,11 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 
 const FixtureScore = ({ homeGoals, awayGoals, statusShort }) => {
+  const { colors } = useTheme();
+
   return (
     <View style={styles.container}>
       <Text style={styles.score}>{homeGoals} : {awayGoals}</Text>
-      <Text style={styles.status}>{statusShort}</Text>
+      <Text style={[styles.status, { color: colors.secondaryBackground }]}>{statusShort}</Text>
     </View>
   )
 }
@@ -19,10 +22,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   score: {
+    color: '#fff',
     fontSize: 26,
   },
   status: {
-    color: '#138B86',
     fontSize: 20,
   }
 })

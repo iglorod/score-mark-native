@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   actionType: {
+    color: '#fff',
     paddingLeft: 5,
   }
 })

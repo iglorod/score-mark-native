@@ -18,22 +18,22 @@ const SelectedPlayer = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.identData} onPress={openPlayer.bind(this, player.player_id)}>
-        <Icon name={'face'} size={30} color={'#999'} />
+        <Icon name={'face'} size={30} color={'#fff'} />
 
         <View>
           <Text style={styles.playerName}>{player.player_name}</Text>
-          <Text style={{ ...styles.playerPosition, color: colors.primary }}>{player.position}</Text>
+          <Text style={{ ...styles.playerPosition, color: colors.thirdBackground }}>{player.position}</Text>
         </View>
       </View>
       <View style={styles.birthPlaceContainer}>
-        <Icon name={'room'} size={20} color={colors.primary} />
-        <Text style={styles.playerBirthPlace}>{player.birth_place}, {player.birth_country}</Text>
+        <Icon name={'room'} size={20} color={colors.thirdBackground} />
+        <Text style={[styles.playerBirthPlace, { color: colors.thirdBackground }]}>{player.birth_place}, {player.birth_country}</Text>
       </View>
     </View>
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     homePlayer: state.fxt.homePlayer,
     awayPlayer: state.fxt.awayPlayer,
@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   playerName: {
+    color: '#fff',
     fontSize: 16,
-    color: 'rgba(0, 0, 0, 0.65)',
   },
   playerPosition: {
     fontSize: 12,

@@ -1,16 +1,21 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 
 const StatisticsCompare = ({ title, home, away }) => {
-  let homeStyle = styles.homeStats;
-  let awayStyle = styles.awayStats;
+  const { colors } = useTheme();
+
+  let homeStyle = [{ color: colors.secondaryBackground }, styles.stats];
+  let awayStyle = [{ color: colors.thirdBackground }, styles.stats];
 
   if (home > away) {
-    homeStyle = { ...homeStyle, ...styles.bold };
+    homeStyle = [homeStyle, styles.bold];
   }
   else if (home < away) {
-    awayStyle = { ...awayStyle, ...styles.bold };
+    awayStyle = [awayStyle, styles.bold];
   }
+
+  console.log(awayStyle);
 
   return (
     <View style={styles.statistics}>
@@ -28,28 +33,24 @@ export default StatisticsCompare;
 
 const styles = StyleSheet.create({
   statistics: {
+    fontFamily: 'OpenSans-Regular',
     alignItems: 'center',
     paddingVertical: 10,
     paddingHorizontal: 20,
     minWidth: 100,
   },
   title: {
-    color: '#000',
+    color: '#fff',
   },
-  homeStats: {
+  stats: {
     fontSize: 16,
-    color: '#138B86',
-  },
-  awayStats: {
-    fontSize: 16,
-    color: '#F6AE2D',
   },
   dash: {
     paddingHorizontal: 5,
-    color: 'rgba(0, 0, 0, 0.65)',
+    color: '#fff',
   },
   bold: {
-    fontWeight: '500',
+    fontFamily: 'OpenSans-Bold',
   },
   body: {
     alignItems: 'center',

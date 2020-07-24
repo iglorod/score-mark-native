@@ -17,10 +17,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   manager: {
-    color: 'rgba(0, 0, 0, 0.65)',
+    color: '#cecece',
   },
   label: {
-    color: '#000',
+    color: '#fff',
     paddingRight: 5,
   }
 })

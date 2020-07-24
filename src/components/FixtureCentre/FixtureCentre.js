@@ -42,22 +42,22 @@ const FixtureCentre = () => {
 
         <View style={styles.buttonsContainer}>
           <TouchableOpacity style={styles.button} onPress={setOpenId.bind(this, 0)}>
-            <Icon name={'swap-vert'} size={20} color={openId === 0 ? colors.primary : '#A5A5A5'} />
+            <Icon name={'swap-vert'} size={20} color={openId === 0 ? colors.thirdBackground : '#bfbfbf'} />
             <Text style={
               openId === 0
-                ? { ...styles.buttonLabel, color: colors.primary }
-                : { ...styles.buttonLabel, color: '#A5A5A5' }
+                ? { ...styles.buttonLabel, color: colors.thirdBackground }
+                : { ...styles.buttonLabel, color: '#bfbfbf' }
             }>
               {'Substitutes'}
             </Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={setOpenId.bind(this, 1)}>
-            <Icon name={'compare'} size={20} color={openId === 1 ? colors.primary : '#A5A5A5'} />
+            <Icon name={'compare'} size={20} color={openId === 1 ? colors.thirdBackground : '#bfbfbf'} />
             <Text style={
               openId === 1
-                ? { ...styles.buttonLabel, color: colors.primary }
-                : { ...styles.buttonLabel, color: '#A5A5A5' }
+                ? { ...styles.buttonLabel, color: colors.thirdBackground }
+                : { ...styles.buttonLabel, color: '#bfbfbf' }
             }>
               {'Compare Players'}
             </Text>

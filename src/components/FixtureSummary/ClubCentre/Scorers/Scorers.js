@@ -36,7 +36,7 @@ export default Scorers;
 const styles = StyleSheet.create({
   container: {
     paddingTop: 10,
-    borderTopColor: '#999',
+    borderTopColor: '#cecece',
     borderTopWidth: 1,
   },
   scoredData: {
@@ -44,9 +44,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   minute: {
-    color: 'rgb(144, 144, 144)',
+    color: '#fff',
   },
   scorer: {
-    color: 'rgb(86, 86, 86)',
+    color: '#fff',
   },
 })

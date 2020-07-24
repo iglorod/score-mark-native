@@ -6,11 +6,11 @@ const ClubsColors = ({ homeName, awayName }) => {
     <View style={styles.container}>
       <View style={styles.club}>
         <View style={styles.firstColor}></View>
-        <Text>{homeName}</Text>
+        <Text style={styles.text}>{homeName}</Text>
       </View>
       <View style={styles.club}>
         <View style={styles.secondColor}></View>
-        <Text>{awayName}</Text>
+        <Text style={styles.text}>{awayName}</Text>
       </View>
     </View>
   )
@@ -41,5 +41,8 @@ const styles = StyleSheet.create({
     height: 15,
     marginHorizontal: 5,
     backgroundColor: '#F6AE2D',
+  },
+  text: {
+    color: '#fff',
   }
 })

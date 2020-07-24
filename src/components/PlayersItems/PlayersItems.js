@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { debounce } from 'lodash';
@@ -39,6 +39,10 @@ const PlayersItems = () => {
     debounceSearch(searchText);
   }, [searchText])
 
+  const openPlayer = useCallback(player => {
+    navigation.navigate('PlayerScreens', player);
+  }, [])
+
   let content = <FetchingSpinner color={'#fff'} />
   if (!loading && players.length === 0) {
     content = <NotFound text={'Enter the correct player name'} />
@@ -46,7 +50,7 @@ const PlayersItems = () => {
   else if (!loading) {
     content = (
       players.map((player, index) => (
-        <PlayerItem key={index} player={player} />
+        <PlayerItem key={index} player={player} onPress={openPlayer.bind(this, player)} />
       ))
     )
   }

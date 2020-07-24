@@ -10,6 +10,7 @@ const OpacityAnimation = (props) => {
       {
         toValue: 1,
         duration: 2000,
+        useNativeDriver: true,
       }
     )).start()
 }, [])

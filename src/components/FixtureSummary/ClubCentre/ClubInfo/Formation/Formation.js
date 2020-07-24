@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const Formation = ({ formation }) => {
   return (
     <View style={styles.container}>
-      <Icon name={'chart-timeline'} size={15} color={'rgba(0, 0, 0, 0.65)'} />
+      <Icon name={'chart-timeline'} size={20} color={'#cecece'} />
       <Text style={styles.label}>Formation</Text>
       <Text style={styles.formation}>{formation}</Text>
     </View>
@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   label: {
-    color: 'rgba(0, 0, 0, 0.65)',
+    color: '#cecece',
     paddingHorizontal: 5
   },
   formation: {
-    color: '#000',
+    color: '#fff',
   }
 })

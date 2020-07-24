@@ -1,10 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 
 const Subtitute = ({ player, away, openPlayer }) => {
+  const { colors } = useTheme();
+  
   return (
     <View style={away ? styles.reverseContainer : styles.container}>
-      <View style={away ? styles.awayAvatar : styles.homeAwatar}>
+      <View style={[styles.avatar, { backgroundColor: away ? colors.secondaryBackground : colors.thirdBackground }]}>
         <Text style={styles.playerPosition}>{player.pos}</Text>
       </View>
 
@@ -53,20 +56,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   playerName: {
-    color: '#000',
+    color: '#fff',
   },
   playerNumber: {
-    color: 'rgba(0, 0, 0, 0.65)',
+    color: '#fff',
     paddingHorizontal: 5,
   },
-  awayAvatar: {
+  avatar: {
     fontSize: 14,
     marginTop: 10,
-    backgroundColor: '#F6AE2D',
-  },
-  homeAwatar: {
-    fontSize: 14,
-    marginTop: 10,
-    backgroundColor: '#138B86',
   },
 })

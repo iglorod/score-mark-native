@@ -7,8 +7,13 @@ import FixtureItem from './FixtureItem/FixtureItem';
 const FixturesItems = ({ fixtures }) => {
   const navigation = useNavigation();
 
-  const openFixture = useCallback((id) => {
-    navigation.navigate('FixtureScreens', { id, })
+  const openFixture = useCallback((fixture) => {
+    navigation.navigate('FixtureScreens', {
+      fixture_id: fixture.fixture_id,
+      homeTeam: fixture.homeTeam,
+      awayTeam: fixture.awayTeam,
+      status: fixture.status,
+    })
   }, [])
 
   const openClub = useCallback((club) => {
@@ -26,7 +31,7 @@ const FixturesItems = ({ fixtures }) => {
             key={index}
             fixture={fixture}
             openClub={openClub}
-            onPress={openFixture.bind(this, fixture.fixture_id)} />
+            onPress={openFixture.bind(this, fixture)} />
         ))
       }
     </View>

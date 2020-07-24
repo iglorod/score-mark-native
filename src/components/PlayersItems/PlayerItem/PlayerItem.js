@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 
 import Card from '../../UI/Card/Card';
 
-const PlayerItem = ({ player }) => {
+const PlayerItem = ({ player, onPress }) => {
   const { colors } = useTheme();
 
   const getRandomInt = (max) => {
@@ -12,31 +12,33 @@ const PlayerItem = ({ player }) => {
   }
 
   return (
-    <Card style={{ marginVertical: 10, }}>
-      <ImageBackground
-        source={require('../../../assets/images/playersPhosos.jpg')}
-        imageStyle={{
-          resizeMode: 'cover',
-          top: getRandomInt(6) * -90,
-          height: 525,
-        }}
-        style={{
-          width: 65,
-          height: 80,
-          overflow: 'hidden',
-        }} />
+    <TouchableOpacity onPress={onPress}>
+      <Card style={{ marginVertical: 10, }}>
+        <ImageBackground
+          source={require('../../../assets/images/playersPhosos.jpg')}
+          imageStyle={{
+            resizeMode: 'cover',
+            top: getRandomInt(6) * -90,
+            height: 525,
+          }}
+          style={{
+            width: 65,
+            height: 80,
+            overflow: 'hidden',
+          }} />
 
-      <View style={styles.dataContainer}>
-        <Text style={styles.playerName} numberOfLines={1}>{player.player_name}</Text>
-        <View>
-          <Text style={[styles.playerPosition, { color: colors.secondaryText }]}>{player.position}</Text>
-          <View style={styles.bottomContainer}>
-            <Text>{player.birth_place}, {player.birth_country}</Text>
-            <Text>{player.age} y.o.</Text>
+        <View style={styles.dataContainer}>
+          <Text style={styles.playerName} numberOfLines={1}>{player.player_name}</Text>
+          <View>
+            <Text style={[styles.playerPosition, { color: colors.secondaryText }]}>{player.position}</Text>
+            <View style={styles.bottomContainer}>
+              <Text>{player.birth_place}, {player.birth_country}</Text>
+              <Text>{player.age} y.o.</Text>
+            </View>
           </View>
         </View>
-      </View>
-    </Card>
+      </Card>
+    </TouchableOpacity>
   )
 }
 
