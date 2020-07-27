@@ -2,52 +2,55 @@ import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { useTheme } from '@react-navigation/native';
-import AsyncStorage from '@react-native-community/async-storage';
 
 import OpenLargeSkeleton from '../UI/OpenLargeSkeleton/OpenLargeSkeleton';
-import ModalSpinner from '../UI/ModalSpinner/ModalSpinner';
-import { setLastClubActionCreator } from '../../store/navbar/actions';
+import { fetchPlayerStatsBySeasonActionCreator } from '../../store/player/actions';
 import { fetchClubStatsActionCreator, fetchClubSquadActionCreator } from '../../store/club/actions';
 
-const ClubMain = (props) => {
+const PlayerMain = (props) => {
   const { colors } = useTheme();
   const { navigation, route } = props;
-  const clubId = route.params.team_id;
+  const id = route.params.player_id;
 
   useEffect(() => {
-    props.fetchClubSquad(clubId);
-
-    AsyncStorage.setItem('LAST_CLUB', JSON.stringify(route.params))
-    props.setLastClub(route.params);
-  }, [props.setLastClub, props.fetchClubSquad])
-
-  if (props.loading) return <ModalSpinner />;
+    props.fetchPlayerStats(new Date().getFullYear());
+  }, [props.fetchPlayerStats])
 
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.title}>{route.params.name}, {route.params.country}</Text>
+        <Text style={styles.title}>{route.params.player_name}, {route.params.position}</Text>
 
         <OpenLargeSkeleton
           headerText={route.params.name}
-          headerIcon={'view-list'}
-          title={'Club Squad'}
-          subTitle={`${props.players.length} players`}
+          headerIcon={'table'}
+          title={'Player Statistics'}
+          subTitle={'Statistics splitted by seasons'}
           subTitleIcon={'cards-club'}
           bottomText={new Date().toLocaleDateString()}
           bottomIcon={'update'}
           backgroundColor={colors.secondaryBackground}
-          onPress={navigation.navigate.bind(this, 'Squad')} />
+          onPress={navigation.navigate.bind(this, 'Stats', { id })} />
         <OpenLargeSkeleton
           headerText={route.params.name}
-          headerIcon={'swap-horizontal-bold'}
-          title={'Club Statistics'}
-          subTitle={'Info from all matches is used'}
+          headerIcon={'plus-circle'}
+          title={'Player Sidelines'}
+          subTitle={'List of player injuries'}
           subTitleIcon={'thermostat'}
           bottomText={new Date().toLocaleDateString()}
           bottomIcon={'update'}
           backgroundColor={colors.thirdBackground}
-          onPress={navigation.navigate.bind(this, 'Stats', { clubId })} />
+          onPress={navigation.navigate.bind(this, 'Sidelined', { id })} />
+        <OpenLargeSkeleton
+          headerText={route.params.name}
+          headerIcon={'swap-horizontal'}
+          title={'Player Transfers'}
+          subTitle={'List of player transfers'}
+          subTitleIcon={'thermostat'}
+          bottomText={new Date().toLocaleDateString()}
+          bottomIcon={'update'}
+          backgroundColor={colors.secondaryBackground}
+          onPress={navigation.navigate.bind(this, 'Transfers', { id })} />
       </View>
     </ScrollView>
   )
@@ -62,13 +65,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setLastClub: (club) => { dispatch(setLastClubActionCreator(club)) },
     fetchClubStats: (clubId) => { dispatch(fetchClubStatsActionCreator(clubId)) },
     fetchClubSquad: (clubId) => { dispatch(fetchClubSquadActionCreator(clubId)) },
+    fetchPlayerStats: (season) => { dispatch(fetchPlayerStatsBySeasonActionCreator(season)) },
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ClubMain);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerMain);
 
 const styles = StyleSheet.create({
   container: {

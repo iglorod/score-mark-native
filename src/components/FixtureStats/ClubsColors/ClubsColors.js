@@ -1,15 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 
 const ClubsColors = ({ homeName, awayName }) => {
+  const { colors } = useTheme();
+
   return (
     <View style={styles.container}>
       <View style={styles.club}>
-        <View style={styles.firstColor}></View>
+        <View style={[styles.square, { backgroundColor: colors.secondaryBackground }]}></View>
         <Text style={styles.text}>{homeName}</Text>
       </View>
       <View style={styles.club}>
-        <View style={styles.secondColor}></View>
+        <View style={[styles.square, { backgroundColor: colors.thirdBackground }]}></View>
         <Text style={styles.text}>{awayName}</Text>
       </View>
     </View>
@@ -30,17 +33,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
   },
-  firstColor: {
+  square: {
     width: 15,
     height: 15,
     marginHorizontal: 5,
-    backgroundColor: '#138B86',
-  },
-  secondColor: {
-    width: 15,
-    height: 15,
-    marginHorizontal: 5,
-    backgroundColor: '#F6AE2D',
   },
   text: {
     color: '#fff',
