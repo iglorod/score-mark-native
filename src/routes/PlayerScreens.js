@@ -12,6 +12,8 @@ const PlayerScreens = (props) => {
   const { clearPlayerData, route } = props;
   const Stack = createStackNavigator();
 
+  console.log(route.params);
+
   useEffect(() => {
     return () => {
       clearPlayerData();

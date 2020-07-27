@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
 import { connect } from 'react-redux';
@@ -5,15 +6,18 @@ import StoredItem from './StoredItem/StoredItem';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation, useNavigationState } from '@react-navigation/native';
 
 import SearchBar from './SearchBar/SearchBar';
 import Dropdown from './Dropdown/Dropdown';
 import { setLastLeagueActionCreator, setLastClubActionCreator } from '../../store/navbar/actions';
 
-const Navbar = (props) => {
+const Navbar = React.memo((props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [openDropdownId, setOpenDropdownId] = useState(null);
+  const routesLength = useNavigationState(state => state.routes.length);
 
+  const navigation = useNavigation();
   const { lastLeague, lastClub } = props;
   const appear = useRef(new Animated.Value(1)).current;
 
@@ -42,9 +46,17 @@ const Navbar = (props) => {
 
   }, [props.setLastLeague, props.setLastClub])
 
+  const backButton = (
+    <TouchableOpacity onPress={navigation.goBack}>
+      <Icon style={styles.backIcon} name={'arrow-back'} size={25} color={'#fff'} />
+    </TouchableOpacity>
+  )
+
   return (
     <View style={[styles.container, { backgroundColor: props.backgroundColor || 'transparent' }]}>
       <Animated.View style={[styles.storedItems, { opacity: appear }]}>
+        {routesLength > 1 ? backButton : null}
+        
         <StoredItem
           logo={lastLeague ? lastLeague.logo : null}
           selected={openDropdownId === 0}
@@ -77,7 +89,7 @@ const Navbar = (props) => {
       <SearchBar isOpen={isOpen} close={setIsOpen.bind(this, false)} />
     </View >
   )
-}
+})
 
 const mapStateToProps = state => {
   return {
@@ -105,7 +117,7 @@ const styles = StyleSheet.create({
   storedItems: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: 90,
+    alignItems: 'center',
   },
   title: {
     flexDirection: 'row',
@@ -127,5 +139,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+  backIcon: {
+    paddingHorizontal: 3,
   }
 })

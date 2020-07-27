@@ -3,29 +3,33 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 import { debounce } from 'lodash';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import FetchingSpinner from '../../../../UI/FetchingSpinner/FetchingSpinner';
 
 import { fetchClubs } from '../../../../../FakeData/FakeData';
 
-const ClubsResults = ({ searchText }) => {
+const ClubsResults = (props) => {
   const [clubs, setClubs] = useState([]);
-  const [isDeployed, setIsDeployed] = useState(false);
+  const [loading, setLodaing] = useState(false);
+
+  const { searchText } = props;
 
   const debounceSearch = useRef(debounce((word) => {
+    setLodaing(true);
     fetchClubs(word)
       .then(response => response.api.results.teams)
       .then(teams => setClubs(teams))
+      .then(() => setLodaing(false))
       .catch(error => console.log(error.message))
   }, 800)).current;
 
   useEffect(() => {
     if (searchText.length < 3) {
-      setClubs([]);
       debounceSearch.cancel();
+      setClubs([]);
       return;
+    } else {
+      debounceSearch(searchText);
     }
-
-    debounceSearch(searchText);
   }, [searchText])
 
   const playersListStyles = {
@@ -34,9 +38,9 @@ const ClubsResults = ({ searchText }) => {
   }
 
   let deployButton = null;
-  if (!isDeployed && clubs.length > 0) {
+  if (!props.deployed && clubs.length > 0) {
     deployButton = (
-      <TouchableOpacity onPress={setIsDeployed.bind(this, true)}>
+      <TouchableOpacity onPress={props.deploy}>
         <View style={styles.deployButton}>
           <Icon name={'keyboard-arrow-down'} size={25} color={'#fff'} />
         </View>
@@ -45,11 +49,11 @@ const ClubsResults = ({ searchText }) => {
   }
 
   let header = null;
-  if (isDeployed && clubs.length > 0) {
+  if (props.deployed && clubs.length > 0) {
     header = (
       <View style={styles.header}>
         <Text style={styles.title}>Clubs</Text>
-        <TouchableOpacity onPress={setIsDeployed.bind(this, false)}>
+        <TouchableOpacity onPress={props.close}>
           <View style={styles.deployButton}>
             <Icon name={'keyboard-arrow-up'} size={25} color={'#fff'} />
           </View>
@@ -58,11 +62,19 @@ const ClubsResults = ({ searchText }) => {
     )
   }
 
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <FetchingSpinner color={'#fff'} size={20} />
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container}>
       {header}
 
-      <View style={!isDeployed && clubs.length > 0 ? playersListStyles : null}>
+      <View style={!props.deployed && clubs.length > 0 ? playersListStyles : null}>
         {
           clubs.map((club, index) => (
             <View style={styles.clubItem} key={index}>
@@ -84,7 +96,7 @@ const ClubsResults = ({ searchText }) => {
   )
 }
 
-export default ClubsResults;
+export default React.memo(ClubsResults);
 
 const styles = StyleSheet.create({
   container: {

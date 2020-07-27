@@ -1,30 +1,29 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 
 const Subtitute = ({ player, away, openPlayer }) => {
   const { colors } = useTheme();
-  
-  return (
-    <View style={away ? styles.reverseContainer : styles.container}>
-      <View style={[styles.avatar, { backgroundColor: away ? colors.secondaryBackground : colors.thirdBackground }]}>
-        <Text style={styles.playerPosition}>{player.pos}</Text>
-      </View>
 
-      <View style={styles.player}>
-        <Text style={styles.playerNumber}>{player.number}{'.'}</Text>
-        <Text
-          style={styles.playerName}
-          onPress={openPlayer.bind(this, player.player_id)}
-        >
-          {player.player}
-        </Text>
+  return (
+    <TouchableOpacity onPress={openPlayer}>
+      <View style={away ? styles.reverseContainer : styles.container}>
+        <View style={[styles.avatar, { backgroundColor: away ? colors.secondaryBackground : colors.thirdBackground }]}>
+          <Text style={styles.playerPosition}>{player.pos}</Text>
+        </View>
+
+        <View style={styles.player}>
+          <Text style={styles.playerNumber}>{player.number}{'.'}</Text>
+          <Text style={styles.playerName}>
+            {player.player}
+          </Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
-export default Subtitute;
+export default React.memo(Subtitute);
 
 const styles = StyleSheet.create({
   container: {

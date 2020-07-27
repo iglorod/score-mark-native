@@ -17,15 +17,15 @@ const Substitutes = (props) => {
     substitutes = fixture.lineups[AwayTeamName].substitutes;
   }
   
-  const openPlayer = useCallback((playerId) => {
-    navigation.navigate('Player', { id: playerId });
+  const openPlayer = useCallback((player) => {
+    navigation.navigate('PlayerScreens', player);
   }, [])
 
   return (
     <View style={styles.container}>
       {
         substitutes.map((player, index) => (
-          <Substitute key={index} player={player} away={away} openPlayer={openPlayer} />
+          <Substitute key={index} player={player} away={away} openPlayer={openPlayer.bind(this, player)} />
         ))
       }
     </View>

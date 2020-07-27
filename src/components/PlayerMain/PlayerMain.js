@@ -19,10 +19,10 @@ const PlayerMain = (props) => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.title}>{route.params.player_name}, {route.params.position}</Text>
+        <Text style={styles.title}>{route.params.player_name || route.params.player}, {route.params.position || route.params.pos}</Text>
 
         <OpenLargeSkeleton
-          headerText={route.params.name}
+          headerText={route.params.name || route.params.player}
           headerIcon={'table'}
           title={'Player Statistics'}
           subTitle={'Statistics splitted by seasons'}
@@ -32,7 +32,7 @@ const PlayerMain = (props) => {
           backgroundColor={colors.secondaryBackground}
           onPress={navigation.navigate.bind(this, 'Stats', { id })} />
         <OpenLargeSkeleton
-          headerText={route.params.name}
+          headerText={route.params.name || route.params.player}
           headerIcon={'plus-circle'}
           title={'Player Sidelines'}
           subTitle={'List of player injuries'}
@@ -42,7 +42,7 @@ const PlayerMain = (props) => {
           backgroundColor={colors.thirdBackground}
           onPress={navigation.navigate.bind(this, 'Sidelined', { id })} />
         <OpenLargeSkeleton
-          headerText={route.params.name}
+          headerText={route.params.name || route.params.player}
           headerIcon={'swap-horizontal'}
           title={'Player Transfers'}
           subTitle={'List of player transfers'}

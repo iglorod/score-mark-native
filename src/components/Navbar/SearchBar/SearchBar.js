@@ -22,10 +22,10 @@ const SearchBar = ({ isOpen, close }) => {
     if (isOpen === false) {
       setTimeout(() => {
         setSearchText('');
-        input.current.blur();
+        input.current ? input.current.blur() : null;
       }, 700)
     } else {
-      input.current.focus();
+      input.current ? input.current.focus() : null;
     }
   }, [isOpen, portraitOrientation])
   

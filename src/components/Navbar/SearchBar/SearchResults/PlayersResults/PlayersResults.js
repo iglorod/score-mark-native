@@ -2,29 +2,34 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, ImageBackground, StyleSheet } from 'react-native';
 import { debounce } from 'lodash';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import FetchingSpinner from '../../../../UI/FetchingSpinner/FetchingSpinner';
 
 import { fetchPlayers } from '../../../../../FakeData/FakeData';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const PlayersResults = ({ searchText }) => {
+const PlayersResults = (props) => {
   const [players, setPlayers] = useState([]);
-  const [isDeployed, setIsDeployed] = useState(false);
+  const [loading, setLodaing] = useState(false);
+
+  const { searchText } = props;
 
   const debounceSearch = useRef(debounce((word) => {
+    setLodaing(true);
     fetchPlayers(word)
       .then(response => response.api.results.players)
       .then(players => setPlayers(players))
+      .then(() => setLodaing(false))
       .catch(error => console.log(error.message))
   }, 800)).current;
 
   useEffect(() => {
     if (searchText.length < 3) {
-      setPlayers([]);
       debounceSearch.cancel();
+      setPlayers([]);
       return;
+    } else {
+      debounceSearch(searchText);
     }
-
-    debounceSearch(searchText);
   }, [searchText])
 
   const getRandomInt = (max) => {
@@ -37,9 +42,9 @@ const PlayersResults = ({ searchText }) => {
   }
 
   let deployButton = null;
-  if (!isDeployed && players.length > 0) {
+  if (!props.deployed && players.length > 0) {
     deployButton = (
-      <TouchableOpacity onPress={setIsDeployed.bind(this, true)}>
+      <TouchableOpacity onPress={props.deploy}>
         <View style={styles.deployButton}>
           <Icon name={'keyboard-arrow-down'} size={25} color={'#fff'} />
         </View>
@@ -48,11 +53,11 @@ const PlayersResults = ({ searchText }) => {
   }
 
   let header = null;
-  if (isDeployed && players.length > 0) {
+  if (props.deployed && players.length > 0) {
     header = (
       <View style={styles.header}>
         <Text style={styles.title}>Players</Text>
-        <TouchableOpacity onPress={setIsDeployed.bind(this, false)}>
+        <TouchableOpacity onPress={props.close}>
           <View style={styles.deployButton}>
             <Icon name={'keyboard-arrow-up'} size={25} color={'#fff'} />
           </View>
@@ -61,10 +66,18 @@ const PlayersResults = ({ searchText }) => {
     )
   }
 
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <FetchingSpinner color={'#fff'} size={20} />
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container}>
       {header}
-      <View style={!isDeployed && players.length > 0 ? playersListStyles : null}>
+      <View style={!props.deployed && players.length > 0 ? playersListStyles : null}>
         {
           players.map((player, index) => (
             <View style={styles.playerItem} key={index}>
@@ -97,7 +110,7 @@ const PlayersResults = ({ searchText }) => {
   )
 }
 
-export default PlayersResults;
+export default React.memo(PlayersResults);
 
 const styles = StyleSheet.create({
   container: {

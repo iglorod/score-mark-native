@@ -1,15 +1,21 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const ClubName = ({ club }) => {
   const navigation = useNavigation();
 
-  const openClub = (clubId) => {
-    navigation.navigate('Club', { id: clubId })
+  console.log(club)
+
+  const openClub = (club) => {
+    navigation.navigate('ClubScreens', club)
   }
 
-  return <Text style={styles.clubName} onPress={openClub.bind(this, club.team_id)}>{club.team_name}</Text>
+  return (
+    <TouchableOpacity onPress={openClub.bind(this, club)}>
+      <Text style={styles.clubName}>{club.team_name}</Text>
+    </TouchableOpacity>
+  )
 }
 
 export default ClubName;

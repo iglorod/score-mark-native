@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useTheme, useNavigation } from '@react-navigation/native';
@@ -9,27 +9,29 @@ const SelectedPlayer = (props) => {
   const navigation = useNavigation();
   const player = props.away ? props.awayPlayer : props.homePlayer;
 
-  const openPlayer = useCallback((playerId) => {
-    navigation.navigate('Player', { id: playerId });
-  }, [])
+  const openPlayer = (player) => {
+    navigation.navigate('PlayerScreens', player);
+  }
 
   if (!player.player_id) return null;
 
   return (
-    <View style={styles.container}>
-      <View style={styles.identData} onPress={openPlayer.bind(this, player.player_id)}>
-        <Icon name={'face'} size={30} color={'#fff'} />
+    <TouchableOpacity onPress={openPlayer.bind(this, player)}>
+      <View style={styles.container}>
+        <View style={styles.identData}>
+          <Icon name={'face'} size={30} color={'#fff'} />
 
-        <View>
-          <Text style={styles.playerName}>{player.player_name}</Text>
-          <Text style={{ ...styles.playerPosition, color: colors.thirdBackground }}>{player.position}</Text>
+          <View>
+            <Text style={styles.playerName}>{player.player_name}</Text>
+            <Text style={{ ...styles.playerPosition, color: colors.thirdBackground }}>{player.position}</Text>
+          </View>
+        </View>
+        <View style={styles.birthPlaceContainer}>
+          <Icon name={'room'} size={20} color={colors.thirdBackground} />
+          <Text style={[styles.playerBirthPlace, { color: colors.thirdBackground }]}>{player.birth_place}, {player.birth_country}</Text>
         </View>
       </View>
-      <View style={styles.birthPlaceContainer}>
-        <Icon name={'room'} size={20} color={colors.thirdBackground} />
-        <Text style={[styles.playerBirthPlace, { color: colors.thirdBackground }]}>{player.birth_place}, {player.birth_country}</Text>
-      </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

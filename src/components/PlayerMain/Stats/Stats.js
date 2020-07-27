@@ -45,7 +45,7 @@ const Stats = (props) => {
       <Text style={styles.title}>Statistics, {stats[0].player_name}</Text>
       <View style={[styles.container, { backgroundColor: colors.secondaryBackground }]}>
         <Table>
-          <Row data={tableHead} style={[styles.head, {backgroundColor: colors.thirdBackground}]} textStyle={styles.text} />
+          <Row data={tableHead} style={[styles.head, { backgroundColor: colors.thirdBackground }]} textStyle={styles.text} />
           <Rows data={playerStats} textStyle={styles.text} />
         </Table>
       </View>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ImageBackground, StyleSheet } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import TimeStats from './TimeStats/TimeStats';
@@ -14,47 +14,49 @@ const Scorers = (props) => {
   }
 
   return (
-    <View
-      style={[styles.playerItem, { backgroundColor }]}>
-      <View style={styles.content}>
-        <ImageBackground
-          source={require('../../../assets/images/playersPhosos.jpg')}
-          imageStyle={{
-            resizeMode: 'cover',
-            top: getRandomInt(6) * -90,
-            height: 525,
-          }}
-          style={{
-            width: 65,
-            height: 80,
-            overflow: 'hidden',
-            borderRadius: 5,
-          }} />
-        <View style={styles.dataContainer}>
-          <Text style={styles.playerName} numberOfLines={1}>{player.firstname} {player.lastname}</Text>
-          <View>
-            <Text style={styles.playerPosition}>
-              <Icon name={'transition-masked'} color={'#fff'} size={20} />
-              {player.position}
-            </Text>
-            <View style={styles.bottomContainer}>
-              <Text style={styles.whiteTint}>{player.nationality}</Text>
-              <Text style={styles.whiteTint}>b.n. {player.player_name}</Text>
+    <TouchableOpacity onPress={props.onPress}>
+      <View
+        style={[styles.playerItem, { backgroundColor }]}>
+        <View style={styles.content}>
+          <ImageBackground
+            source={require('../../../assets/images/playersPhosos.jpg')}
+            imageStyle={{
+              resizeMode: 'cover',
+              top: getRandomInt(6) * -90,
+              height: 525,
+            }}
+            style={{
+              width: 65,
+              height: 80,
+              overflow: 'hidden',
+              borderRadius: 5,
+            }} />
+          <View style={styles.dataContainer}>
+            <Text style={styles.playerName} numberOfLines={1}>{player.firstname} {player.lastname}</Text>
+            <View>
+              <Text style={styles.playerPosition}>
+                <Icon name={'transition-masked'} color={'#fff'} size={20} />
+                {player.position}
+              </Text>
+              <View style={styles.bottomContainer}>
+                <Text style={styles.whiteTint}>{player.nationality}</Text>
+                <Text style={styles.whiteTint}>b.n. {player.player_name}</Text>
+              </View>
             </View>
           </View>
+          <Text style={styles.rank}>{`#${props.rank}`}</Text>
         </View>
-        <Text style={styles.rank}>{`#${props.rank}`}</Text>
+        <View style={styles.playerStats}>
+          <TimeStats player={player} />
+          <GoalsStats player={player} />
+          <ShotsStats player={player} progressColor={props.progressColor} />
+        </View>
       </View>
-      <View style={styles.playerStats}>
-        <TimeStats player={player} />
-        <GoalsStats player={player} />
-        <ShotsStats player={player} progressColor={props.progressColor} />
-      </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
-export default Scorers;
+export default React.memo(Scorers);
 
 const styles = StyleSheet.create({
   playerItem: {

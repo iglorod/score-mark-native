@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from '@react-navigation/native';
 
 import Scorer from './Scorer/Scorer';
 
-const TopScorers = ({ route }) => {
+const TopScorers = ({ navigation, route }) => {
   const playerData = route.params;
   const { colors } = useTheme();
+
+  const openPlayer = useCallback((player) => {
+    navigation.navigate('PlayerScreens', player);
+  }, [])
 
   return (
     <ScrollView>
@@ -27,7 +31,8 @@ const TopScorers = ({ route }) => {
               player={player}
               rank={index + 1}
               progressColor={(index % 2 !== 0) ? colors.secondaryBackground : colors.thirdBackground}
-              backgroundColor={(index % 2 === 0) ? colors.secondaryBackground : colors.thirdBackground} />
+              backgroundColor={(index % 2 === 0) ? colors.secondaryBackground : colors.thirdBackground}
+              onPress={openPlayer.bind(this, player)} />
           ))
         }
       </View>

@@ -18,10 +18,12 @@ const OpenClub = () => {
   const move = useRef(new Animated.Value(rightIndent)).current;
   const grow = useRef(new Animated.Value(0)).current;
 
-  useEffect(() => {
+  const onLayout = () => {
     if (Dimensions.get('window').width === screenWidth) return;
+    const openScreen = rightIndent / screenWidth;
     setScreenWidth(Dimensions.get('window').width);
-  }, [Dimensions.get('window').width])
+    setRightIndent(Dimensions.get('window').width * openScreen);
+  }
 
   useEffect(() => {
     moveAnimation();
@@ -56,7 +58,7 @@ const OpenClub = () => {
   const currentScreenId = Math.ceil(rightIndent / screenWidth);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} onLayout={onLayout}>
       <Animated.View
         style={{
           right: move,

@@ -49,7 +49,7 @@ const Transfers = (props) => {
       <Text style={styles.title}>Transfers, {stats[0].player_name}</Text>
       <View style={[styles.container, { backgroundColor: colors.secondaryBackground }]}>
         <Table>
-          <Row data={tableHead} style={styles.head} textStyle={styles.text} />
+          <Row data={tableHead} style={[styles.head, { backgroundColor: colors.thirdBackground }]} textStyle={styles.text} />
           <Rows data={playerTransfers} textStyle={styles.text} />
         </Table>
       </View>
@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
   },
   head: {
     height: 40,
-    backgroundColor: 'rgba(0,0,0,0.2)',
     borderRadius: 5,
   },
   text: {

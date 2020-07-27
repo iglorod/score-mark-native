@@ -3,28 +3,33 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 import { debounce } from 'lodash';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import FetchingSpinner from '../../../../UI/FetchingSpinner/FetchingSpinner';
 
 import { LeagesByCountry } from '../../../../../FakeData/FakeData';
 
-const LeaguesResults = ({ searchText }) => {
+const LeaguesResults = (props) => {
   const [leagues, setLeagues] = useState([]);
-  const [isDeployed, setIsDeployed] = useState(false);
+  const [loading, setLodaing] = useState(false);
+
+  const { searchText } = props;
 
   const debounceSearch = useRef(debounce((word) => {
+    setLodaing(true);
     LeagesByCountry(word)
       .then(response => response.api.results.leagues)
       .then(leagues => setLeagues(leagues))
+      .then(() => setLodaing(false))
       .catch(error => console.log(error.message))
   }, 800)).current;
 
   useEffect(() => {
     if (searchText.length < 3) {
-      setLeagues([]);
       debounceSearch.cancel();
+      setLeagues([]);
       return;
+    } else {
+      debounceSearch(searchText);
     }
-
-    debounceSearch(searchText);
   }, [searchText])
 
   const playersListStyles = {
@@ -33,9 +38,9 @@ const LeaguesResults = ({ searchText }) => {
   }
 
   let deployButton = null;
-  if (!isDeployed && leagues.length > 0) {
+  if (!props.deployed && leagues.length > 0) {
     deployButton = (
-      <TouchableOpacity onPress={setIsDeployed.bind(this, true)}>
+      <TouchableOpacity onPress={props.deploy}>
         <View style={styles.deployButton}>
           <Icon name={'keyboard-arrow-down'} size={25} color={'#fff'} />
         </View>
@@ -44,11 +49,11 @@ const LeaguesResults = ({ searchText }) => {
   }
 
   let header = null;
-  if (isDeployed && leagues.length > 0) {
+  if (props.deployed && leagues.length > 0) {
     header = (
       <View style={styles.header}>
         <Text style={styles.title}>Leagues</Text>
-        <TouchableOpacity onPress={setIsDeployed.bind(this, false)}>
+        <TouchableOpacity onPress={props.close}>
           <View style={styles.deployButton}>
             <Icon name={'keyboard-arrow-up'} size={25} color={'#fff'} />
           </View>
@@ -57,10 +62,18 @@ const LeaguesResults = ({ searchText }) => {
     )
   }
 
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <FetchingSpinner color={'#fff'} size={20} />
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container}>
       {header}
-      <View style={!isDeployed && leagues.length > 0 ? playersListStyles : null}>
+      <View style={!props.deployed && leagues.length > 0 ? playersListStyles : null}>
         {
           leagues.map((league, index) => (
             <View style={styles.leagueItem} key={index}>
@@ -82,7 +95,7 @@ const LeaguesResults = ({ searchText }) => {
   )
 }
 
-export default LeaguesResults;
+export default React.memo(LeaguesResults);
 
 const styles = StyleSheet.create({
   container: {

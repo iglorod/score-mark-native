@@ -21,32 +21,32 @@ const App = () => {
   const [isReady, setIsReady] = React.useState(false);
   const [initialState, setInitialState] = React.useState();
 
-  React.useEffect(() => {
-    const restoreState = async () => {
-      try {
-        const initialUrl = await Linking.getInitialURL();
+  // React.useEffect(() => {
+  //   const restoreState = async () => {
+  //     try {
+  //       const initialUrl = await Linking.getInitialURL();
 
-        if (Platform.OS !== 'web' && initialUrl == null) {
-          const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
-          const state = savedStateString ? JSON.parse(savedStateString) : undefined;
+  //       if (Platform.OS !== 'web' && initialUrl == null) {
+  //         const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
+  //         const state = savedStateString ? JSON.parse(savedStateString) : undefined;
 
-          if (state !== undefined) {
-            setInitialState(state);
-          }
-        }
-      } finally {
-        setIsReady(true);
-      }
-    };
+  //         if (state !== undefined) {
+  //           setInitialState(state);
+  //         }
+  //       }
+  //     } finally {
+  //       setIsReady(true);
+  //     }
+  //   };
 
-    if (!isReady) {
-      restoreState();
-    }
-  }, [isReady]);
+  //   if (!isReady) {
+  //     restoreState();
+  //   }
+  // }, [isReady]);
 
-  if (!isReady) {
-    return null;
-  }
+  // if (!isReady) {
+  //   return null;
+  // }
 
   const store = createStore(combineReducers({
     club: clubReducer,
@@ -56,14 +56,27 @@ const App = () => {
     nvb: navbarReducer,
   }), applyMiddleware(thunk))
 
+  const getCircularReplacer = () => {
+    const seen = new Set();
+    return (key, value) => {
+      if (typeof value === 'object' && value !== null) {
+        if (seen.has(value)) {
+          return;
+        }
+        seen.add(value);
+      }
+      return value;
+    };
+  };
+
   return (
     <Provider store={store}>
       <NavigationContainer
         theme={MyTheme}
-        initialState={initialState}
-        onStateChange={(state) =>
-          AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
-        }
+        // initialState={initialState}
+        // onStateChange={(state) =>
+        //   AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state, getCircularReplacer()))
+        // }
       >
         <SafeAreaView style={styles.mainContainer}>
           <Layout />
