@@ -6,6 +6,7 @@ import { useTheme } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import ModalSpinner from '../UI/ModalSpinner/ModalSpinner';
+import LinksToScreens from '../LinksToScreens/LinksToScreens';
 
 const Standing = ({ navigation, route }) => {
   const [teamsData, setTeamsData] = useState([]);
@@ -53,6 +54,14 @@ const Standing = ({ navigation, route }) => {
 
   return (
     <ScrollView>
+      <LinksToScreens
+        values={[
+          {
+            name: 'Top Scorers',
+            path: 'Top Scorers',
+          }
+        ]} />
+
       <View style={[styles.container, { backgroundColor: colors.thirdBackground }]}>
         <View style={styles.header}>
           <View style={styles.tableTitle}>

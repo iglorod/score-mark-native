@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from '@react-navigation/native';
 
 import Scorer from './Scorer/Scorer';
+import LinksToScreens from '../LinksToScreens/LinksToScreens';
 
 const TopScorers = ({ navigation, route }) => {
   const playerData = route.params;
@@ -16,6 +17,14 @@ const TopScorers = ({ navigation, route }) => {
   return (
     <ScrollView>
       <View style={styles.container}>
+        <LinksToScreens
+          values={[
+            {
+              name: 'Standing',
+              path: 'Standing',
+            }
+          ]} />
+
         <View style={styles.header}>
           <View>
             <Text style={styles.title}>League Top Scorers</Text>
@@ -46,6 +55,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 15,
+    paddingTop: 0,
     fontFamily: 'OpenSans-Regular',
   },
   header: {

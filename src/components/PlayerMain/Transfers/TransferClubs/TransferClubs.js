@@ -25,9 +25,13 @@ const TransferClubs = ({ from, to }) => {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: fromTeam.logo }} />
+      <View style={styles.imageWrapper}>
+        <Image style={styles.image} source={{ uri: fromTeam.logo }} />
+      </View>
       <Icon style={styles.icon} name={'arrow-right-bold'} size={15} color={'#333'} />
-      <Image style={styles.image} source={{ uri: toTeam.logo }} />
+      <View style={styles.imageWrapper}>
+        <Image style={styles.image} source={{ uri: toTeam.logo }} />
+      </View>
     </View>
   )
 }
@@ -45,5 +49,13 @@ const styles = StyleSheet.create({
   image: {
     height: 25,
     width: 25,
+  },
+  imageWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 30,
+    width: 30,
+    backgroundColor: '#fff',
+    borderRadius: 50,
   }
 })

@@ -9,6 +9,7 @@ import SelectedPlayer from './SelectedPlayer/SelectedPlayer';
 import PlayersStatistics from './PlayersStatistics/PlayersStatistics';
 import FixtureSummary from '../FixtureSummary/FixtureSummary';
 import DeviceOrientation from '../UI/DeviceOrientation/DeviceOrientation';
+import LinksToScreens from '../LinksToScreens/LinksToScreens';
 
 const FixtureCentre = () => {
   const [openId, setOpenId] = useState(0);
@@ -36,6 +37,22 @@ const FixtureCentre = () => {
   const content = (
     <ScrollView>
       <View style={styles.container}>
+        <LinksToScreens
+          values={[
+            {
+              name: 'Statistics',
+              path: 'Stats',
+            },
+            {
+              name: 'Events',
+              path: 'Events',
+            },
+            {
+              name: 'Odds',
+              path: 'Odds',
+            }
+          ]} />
+
         <FixtureSummary />
 
         <Formation />

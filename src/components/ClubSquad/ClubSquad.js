@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
+import LinksToScreens from '../LinksToScreens/LinksToScreens';
 import ClubInfo from '../ClubInfo/ClubInfo';
 import ModalSpinner from '../UI/ModalSpinner/ModalSpinner';
 import Player from './Player/Player';
@@ -19,6 +20,14 @@ const ClubSquad = (props) => {
   return (
     <View style={styles.container}>
       <ClubInfo />
+
+      <LinksToScreens
+        values={[
+          {
+            name: 'Statistics',
+            path: 'Stats',
+          }
+        ]} />
 
       {
         Object.values(props.players).map((player, index) => (

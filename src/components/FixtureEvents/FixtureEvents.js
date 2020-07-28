@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { useTheme, useNavigation } from '@react-navigation/native';
 
 import Event from './Event/Event';
+import LinksToScreens from '../LinksToScreens/LinksToScreens';
 
 const FixtureEvents = ({ fixture }) => {
   const { colors } = useTheme();
@@ -18,6 +19,22 @@ const FixtureEvents = ({ fixture }) => {
 
   return (
     <View style={styles.container}>
+ <LinksToScreens
+        values={[
+          {
+            name: 'Statistics',
+            path: 'Stats',
+          },
+          {
+            name: 'Centre',
+            path: 'Centre',
+          },
+          {
+            name: 'Odds',
+            path: 'Odds',
+          }
+        ]} />
+
       {
         fixture.events.map((event, index) => (
           <Event

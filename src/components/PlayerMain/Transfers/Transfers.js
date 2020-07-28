@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Table, Row, Rows } from 'react-native-table-component';
 import { useTheme } from '@react-navigation/native';
 
+import LinksToScreens from '../../LinksToScreens/LinksToScreens';
 import ModalSpinner from '../../UI/ModalSpinner/ModalSpinner';
 import TransferClubs from './TransferClubs/TransferClubs';
 import { fetchPlayerTransfersActionCreator } from '../../../store/player/actions';
@@ -46,10 +47,22 @@ const Transfers = (props) => {
 
   return (
     <ScrollView>
+      <LinksToScreens
+        values={[
+          {
+            name: 'Statistics',
+            path: 'Stats',
+          },
+          {
+            name: 'Sidelines',
+            path: 'Sidelined',
+          }
+        ]} />
+
       <Text style={styles.title}>Transfers, {stats[0].player_name}</Text>
       <View style={[styles.container, { backgroundColor: colors.secondaryBackground }]}>
         <Table>
-          <Row data={tableHead} style={[styles.head, { backgroundColor: colors.thirdBackground }]} textStyle={styles.text} />
+          <Row data={tableHead} style={styles.head} textStyle={styles.text} />
           <Rows data={playerTransfers} textStyle={styles.text} />
         </Table>
       </View>
@@ -82,6 +95,7 @@ const styles = StyleSheet.create({
   },
   head: {
     height: 40,
+    backgroundColor: 'rgba(0,0,0,0.1)',
     borderRadius: 5,
   },
   text: {

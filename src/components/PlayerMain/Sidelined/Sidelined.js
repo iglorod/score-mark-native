@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from '@react-navigation/native';
 
+import LinksToScreens from '../../LinksToScreens/LinksToScreens';
 import FetchingSpinner from '../../UI/FetchingSpinner/FetchingSpinner';
 import { fetchPlayerSidelinesActionCreator } from '../../../store/player/actions';
 
@@ -22,6 +23,18 @@ const Sidelined = (props) => {
 
   return (
     <ScrollView>
+      <LinksToScreens
+        values={[
+          {
+            name: 'Statistics',
+            path: 'Stats',
+          },
+          {
+            name: 'Transfers',
+            path: 'Transfers',
+          },
+        ]} />
+
       <Text style={styles.title}>Sidelines, {stats[0].player_name}</Text>
       <View style={styles.sidelined}>
         {

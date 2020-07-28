@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { Table, Row, Rows } from 'react-native-table-component';
 import { useTheme } from '@react-navigation/native';
 
+import LinksToScreens from '../../LinksToScreens/LinksToScreens';
 import FetchingSpinner from '../../UI/FetchingSpinner/FetchingSpinner';
 import { fetchAvailibleSeasonsActionCreator } from '../../../store/player/actions';
 
@@ -42,6 +43,18 @@ const Stats = (props) => {
 
   return (
     <ScrollView>
+      <LinksToScreens
+        values={[
+          {
+            name: 'Sidelines',
+            path: 'Sidelined',
+          },
+          {
+            name: 'Transfers',
+            path: 'Transfers',
+          },
+        ]} />
+
       <Text style={styles.title}>Statistics, {stats[0].player_name}</Text>
       <View style={[styles.container, { backgroundColor: colors.secondaryBackground }]}>
         <Table>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
+import LinksToScreens from '../LinksToScreens/LinksToScreens';
 import ModalSpinner from '../UI/ModalSpinner/ModalSpinner';
 import { fetchClubStatsActionCreator } from '../../store/club/actions';
 import ComparePercents from '../UI/ComparePercents/ComparePercents';
@@ -15,6 +16,14 @@ const ClubStats = ({ stats, fetchClubStats }) => {
 
   return (
     <View style={styles.container}>
+      <LinksToScreens
+        values={[
+          {
+            name: 'Squad',
+            path: 'Squad',
+          }
+        ]} />
+
       <ComparePercents
         title={'Match played Home/Away'}
         first={stats.matchs.matchsPlayed.home}
