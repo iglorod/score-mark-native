@@ -5,8 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 const ClubName = ({ club }) => {
   const navigation = useNavigation();
 
-  console.log(club)
-
   const openClub = (club) => {
     navigation.navigate('ClubScreens', club)
   }

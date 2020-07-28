@@ -11,7 +11,7 @@ const LinksToScreens = ({ values }) => {
     <View style={styles.container}>
       {
         values.map((value, index) => (
-          <TouchableOpacity key={index} onPress={navigation.navigate.bind(this, value.path)}>
+          <TouchableOpacity key={index} onPress={navigation.navigate.bind(this, value.path, value.params)}>
             <View style={[
               styles.item,
               {

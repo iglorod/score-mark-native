@@ -19,7 +19,7 @@ const FixtureEvents = ({ fixture }) => {
 
   return (
     <View style={styles.container}>
- <LinksToScreens
+      <LinksToScreens
         values={[
           {
             name: 'Statistics',

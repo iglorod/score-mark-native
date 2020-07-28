@@ -15,8 +15,6 @@ const StatisticsCompare = ({ title, home, away }) => {
     awayStyle = [awayStyle, styles.bold];
   }
 
-  console.log(awayStyle);
-
   return (
     <View style={styles.statistics}>
       <Text style={styles.title}>{title}</Text>

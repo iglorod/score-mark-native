@@ -16,10 +16,9 @@ const LeagueMain = (props) => {
 
   const { colors } = useTheme();
   const { navigation, route } = props;
+  const leagueId = route.params.league_id;
 
   useEffect(() => {
-    const leagueId = route.params.league_id;
-
     Promise.all([leagueStatnding(leagueId), topScorers(leagueId)])
       .then(([standingResponse, scorersResponse]) => [
         standingResponse.api.results.standings,
@@ -52,7 +51,7 @@ const LeagueMain = (props) => {
           bottomText={standing[0].lastUpdate}
           bottomIcon={'update'}
           backgroundColor={colors.secondaryBackground}
-          onPress={navigation.navigate.bind(this, 'Standing', standing)} />
+          onPress={navigation.navigate.bind(this, 'Standing', { leagueId })} />
         <OpenLargeSkeleton
           headerText={standing[0].description}
           headerIcon={'target-account'}
@@ -62,7 +61,7 @@ const LeagueMain = (props) => {
           bottomText={standing[0].lastUpdate}
           bottomIcon={'update'}
           backgroundColor={colors.thirdBackground}
-          onPress={navigation.navigate.bind(this, 'Top Scorers', scorers)} />
+          onPress={navigation.navigate.bind(this, 'Top Scorers', { leagueId })} />
       </View>
     </ScrollView>
   )

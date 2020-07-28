@@ -1,9 +1,10 @@
 /* eslint-disable react/display-name */
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { debounce } from 'lodash';
 
+import ScrollToTopView from '../UI/ScrollToTopView/ScrollToTopView';
 import Navbar from '../Navbar/Navbar';
 import FetchingSpinner from '../UI/FetchingSpinner/FetchingSpinner';
 import SearchPlayer from './SearchPlayer/SearchPlayer';
@@ -57,11 +58,11 @@ const PlayersItems = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.secondaryBackground }]}>
-      <ScrollView>
+      <ScrollToTopView>
         <SearchPlayer searchText={searchText} setSearchText={setSearchText} />
 
         {content}
-      </ScrollView>
+      </ScrollToTopView>
     </View>
   )
 }

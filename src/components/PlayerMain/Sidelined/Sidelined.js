@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from '@react-navigation/native';
 
+import ScrollToTopView from '../../UI/ScrollToTopView/ScrollToTopView';
 import LinksToScreens from '../../LinksToScreens/LinksToScreens';
 import FetchingSpinner from '../../UI/FetchingSpinner/FetchingSpinner';
 import { fetchPlayerSidelinesActionCreator } from '../../../store/player/actions';
@@ -22,7 +23,7 @@ const Sidelined = (props) => {
   if (sidelined.length === 0 || stats.length === 0) return <FetchingSpinner color={'#fff'} />;
 
   return (
-    <ScrollView>
+    <ScrollToTopView>
       <LinksToScreens
         values={[
           {
@@ -58,7 +59,7 @@ const Sidelined = (props) => {
           ))
         }
       </View>
-    </ScrollView >
+    </ScrollToTopView >
   )
 }
 

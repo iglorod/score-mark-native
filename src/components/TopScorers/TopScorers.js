@@ -1,27 +1,42 @@
-import React, { useCallback } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from '@react-navigation/native';
+import { topScorers } from '../../FakeData/FakeData';
 
+import ModalSpinner from '../UI/ModalSpinner/ModalSpinner';
+import ScrollToTopView from '../UI/ScrollToTopView/ScrollToTopView';
 import Scorer from './Scorer/Scorer';
 import LinksToScreens from '../LinksToScreens/LinksToScreens';
 
 const TopScorers = ({ navigation, route }) => {
-  const playerData = route.params;
+  const [scorers, setScorers] = useState(null);
+
   const { colors } = useTheme();
+  const leagueId = route.params.leagueId;
+
+  useEffect(() => {
+    topScorers(leagueId)
+      .then(scorersResponse => scorersResponse.api.results.topscorers)
+      .then(scorers => setScorers(scorers))
+      .catch(error => console.log(error.message))
+  }, [topScorers])
 
   const openPlayer = useCallback((player) => {
     navigation.navigate('PlayerScreens', player);
   }, [])
 
+  if (!scorers) return <ModalSpinner />;
+
   return (
-    <ScrollView>
+    <ScrollToTopView>
       <View style={styles.container}>
         <LinksToScreens
           values={[
             {
               name: 'Standing',
               path: 'Standing',
+              params: { leagueId },
             }
           ]} />
 
@@ -34,7 +49,7 @@ const TopScorers = ({ navigation, route }) => {
         </View>
 
         {
-          playerData.map((player, index) => (
+          scorers.map((player, index) => (
             <Scorer
               key={index}
               player={player}
@@ -45,7 +60,7 @@ const TopScorers = ({ navigation, route }) => {
           ))
         }
       </View>
-    </ScrollView>
+    </ScrollToTopView>
   )
 }
 

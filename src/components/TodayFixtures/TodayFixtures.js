@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from '@react-navigation/native';
 
+import ScrollToTopView from '../UI/ScrollToTopView/ScrollToTopView';
 import FixtureItem from '../FixturesItems/FixturesItems';
 import FetchingSpinner from '../UI/FetchingSpinner/FetchingSpinner';
 import { todayFixtures } from '../../FakeData/FakeData';
@@ -27,7 +28,7 @@ const TodayFixtures = () => {
   const todayDate = new Date().toDateString();
 
   return (
-    <ScrollView>
+    <ScrollToTopView>
       <View style={styles.container}>
         <View style={styles.clubDataContainer}>
           <Icon name={'calendar-today'} size={100} color={colors.secondaryText} />
@@ -40,7 +41,7 @@ const TodayFixtures = () => {
 
         {content}
       </View>
-    </ScrollView>
+    </ScrollToTopView>
   )
 }
 

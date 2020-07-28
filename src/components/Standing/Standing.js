@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { Table, Row, Rows } from 'react-native-table-component';
 import { useTheme } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { leagueStatnding } from '../../FakeData/FakeData';
 
 import ModalSpinner from '../UI/ModalSpinner/ModalSpinner';
 import LinksToScreens from '../LinksToScreens/LinksToScreens';
@@ -12,18 +13,21 @@ const Standing = ({ navigation, route }) => {
   const [teamsData, setTeamsData] = useState([]);
   const [leagueData, setLeagueData] = useState({});
 
-  const standing = route.params;
+  const leagueId = route.params.leagueId;
   const { colors } = useTheme();
+
+  useEffect(() => {
+    leagueStatnding(leagueId)
+      .then(response => response.api.results.standings)
+      .then(standing => moveTeamDataToTable(standing))
+      .catch(error => console.log(error.message))
+  }, [leagueStatnding])
 
   navigation.setOptions({
     headerStyle: {
       backgroundColor: 'red',
     }
   })
-
-  useEffect(() => {
-    moveTeamDataToTable(standing);
-  }, [])
 
   const moveTeamDataToTable = (data) => {
     let dataSource = [];
@@ -59,6 +63,7 @@ const Standing = ({ navigation, route }) => {
           {
             name: 'Top Scorers',
             path: 'Top Scorers',
+            params: { leagueId },
           }
         ]} />
 
